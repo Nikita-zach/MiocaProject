@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from decouple import config
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'payments.apps.PaymentsConfig',
+    'product.apps.ProductConfig',
+    'user_authorization.apps.UserAuthorizationConfig',
+    'wishlist.apps.WishlistConfig',
+    'home.apps.HomeConfig'
 ]
 
 MIDDLEWARE = [
@@ -77,8 +85,8 @@ WSGI_APPLICATION = 'MiocaProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mioca_database',
-        'USER': 'user_mioca_database',
+        'NAME': 'mioca_db',
+        'USER': 'mioca_user',
         'PASSWORD': 'mypassword',
         'HOST': 'localhost',
         'PORT': '5432',
