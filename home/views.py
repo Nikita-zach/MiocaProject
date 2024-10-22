@@ -6,6 +6,8 @@ def home(request):
 
     categories = Category.objects.filter(is_visible=True).order_by('sort')
     products = Products.objects.filter(is_visible=True).order_by('sort')
+    discounted_category = Category.objects.get(slug='discounted')
+    discounted_products = Products.objects.filter(category=discounted_category, is_visible=True).order_by('sort')
 
     if request.user.is_authenticated:
         cart = Cart.objects.get(user=request.user)
@@ -15,11 +17,11 @@ def home(request):
         wishlist = None
 
     context = {
+        'discounted_products': discounted_products,
         "categories": categories,
         "products": products,
         "cart": cart,
         "wishlist": wishlist,
-        "book_table_form": book_table_form
     }
 
     return render(request, "index.html", context)

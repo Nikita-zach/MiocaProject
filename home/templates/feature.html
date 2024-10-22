@@ -1,45 +1,21 @@
-{% load static %}
 <!-- Feature Area Start -->
 <div class="feature-area pt-100px">
     <div class="container">
         <div class="feature-wrapper">
+            {% for feature in features %}
             <div class="single-feture-col">
                 <!-- single item -->
                 <div class="single-feature">
                     <div class="feature-icon">
-                        <img src="{% static 'images/icons/1.png' %}" alt="">
+                        <img src="{{ feature.image.url }}" alt="{{ feature.name }}">
                     </div>
                     <div class="feature-content">
-                        <h4 class="title">Free Shipping</h4>
-                        <span class="sub-title">Capped at $39 per order</span>
+                        <h4 class="title">{{ feature.name }}</h4>
+                        <span class="sub-title">{{ feature.description }}</span>
                     </div>
                 </div>
             </div>
-            <!-- single item -->
-            <div class="single-feture-col">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <img src="{% static 'images/icons/2.png' %}" alt="">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="title">Card Payments</h4>
-                        <span class="sub-title">12 Months Installments</span>
-                    </div>
-                </div>
-            </div>
-            <!-- single item -->
-            <div class="single-feture-col">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <img src="{% static 'images/icons/3.png' %}" alt="">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="title">Easy Returns</h4>
-                        <span class="sub-title">Shop With Confidence</span>
-                    </div>
-                </div>
-                <!-- single item -->
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

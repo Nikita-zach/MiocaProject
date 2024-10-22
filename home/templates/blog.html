@@ -5,73 +5,35 @@
         <!-- section title start -->
         <div class="row">
             <div class="col-md-12">
-                <div class="section-title text-center mb-30px0px">
-                    <h2 class="title">Latest Blog</h2>
-                    <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        incididunt ut labore et dolore magna aliqua.
-                    </p>
+                <div class="section-title text-center mb-30px">
+                    <h2 class="title">{{ blog_window.main_title }}</h2>
+                    <p class="sub-title">{{ blog_window.main_description }}</p>
                 </div>
             </div>
         </div>
-        <!-- section title start -->
+        <!-- section title end -->
 
         <div class="row">
+            {% for blog in blog_window.blogs.all %}
             <div class="col-lg-4 col-md-6 mb-md-30px mb-lm-30px">
                 <div class="single-blog">
                     <div class="blog-image">
-                        <a href="blog-single-left-sidebar.html"><img src="{% static 'images/blog-image/1.jpg' %}"
+                        <a href="{% url 'blog_single' blog.id %}"><img src="{{ blog.main_image.url }}"
                                 class="img-responsive w-100" alt=""></a>
                     </div>
                     <div class="blog-text">
-                        <div class="blog-athor-date">
-                            <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                            <span class="blog-date">25 May, 2121</span>
+                        <div class="blog-author-date">
+                            <span> By,<a class="blog-author cercle-shape" href="#">{{ blog.by_user }}</a></span>
+                            <span class="blog-date">{{ blog.date|date:"d F, Y" }}</span>
                         </div>
                         <h5 class="blog-heading"><a class="blog-heading-link"
-                                href="blog-single-left-sidebar.html">How to Explain Handmade Product to Your Boss</a>
+                                href="{% url 'blog_single' blog.id %}">{{ blog.title }}</a>
                         </h5>
-                        <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
+                        <a href="{% url 'blog_single' blog.id %}" class="btn btn-primary blog-btn"> Read More</a>
                     </div>
                 </div>
             </div>
-            <!-- End single blog -->
-            <div class="col-lg-4 col-md-6 mb-md-30px mb-lm-30px">
-                <div class="single-blog ">
-                    <div class="blog-image">
-                        <a href="blog-single-left-sidebar.html"><img src="{% static 'images/blog-image/2.jpg' %}"
-                                class="img-responsive w-100" alt=""></a>
-                    </div>
-                    <div class="blog-text">
-                        <div class="blog-athor-date">
-                            <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                            <span class="blog-date">25 May, 2121</span>
-                        </div>
-                        <h5 class="blog-heading"><a class="blog-heading-link"
-                                href="blog-single-left-sidebar.html">7 Best Blogs to Follow About Handmade Goods
-                            </a></h5>
-                        <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
-                    </div>
-                </div>
-            </div>
-            <!-- End single blog -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-blog">
-                    <div class="blog-image">
-                        <a href="blog-single-left-sidebar.html"><img src="{% static 'images/blog-image/3.jpg' %}"
-                                class="img-responsive w-100" alt=""></a>
-                    </div>
-                    <div class="blog-text">
-                        <div class="blog-athor-date">
-                            <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                            <span class="blog-date">25 May, 2121</span>
-                        </div>
-                        <h5 class="blog-heading"><a class="blog-heading-link"
-                                href="blog-single-left-sidebar.html">Us Too. 6 Reasons We Just Can't Stop
-                            </a></h5>
-                        <a href="blog-single-left-sidebar.html" class="btn btn-primary blog-btn"> Read More</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
             <!-- End single blog -->
         </div>
     </div>
