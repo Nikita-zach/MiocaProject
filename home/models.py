@@ -14,8 +14,11 @@ class Category(models.Model):
 
     def __iter__(self):
         products = self.products.filter(is_visible=True).order_by('sort')
-        for dish in products:
-            yield dish
+        for product in products:
+            yield product
+
+    def visible_product_count(self):
+        return self.products.filter(is_visible=True).count()
 
     def __str__(self):
         return self.name
@@ -35,7 +38,7 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    categories = models.ManyToManyField(Category, related_name='products')
 
     def final_price(self):
         if self.discount_price is not None:
@@ -54,15 +57,15 @@ class Products(models.Model):
         return self.name
 
 
-    class Review(models.Model):
-        product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='reviews')
-        user = models.ForeignKey(User, on_delete=models.CASCADE)
-        rating = models.IntegerField()
-        comment = models.TextField(blank=True, null=True)
-        created_at = models.DateTimeField(auto_now_add=True)
+class Review(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-        def __str__(self):
-            return f'Review by {self.user.username} for {self.product.name}'
+    def __str__(self):
+        return f'Review by {self.user.username} for {self.product.name}'
 
 
 class Cart(models.Model):
@@ -99,6 +102,7 @@ class WishlistItem(models.Model):
     def __str__(self):
         return self.product.name
 
+
 class Feature(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
@@ -110,7 +114,6 @@ class Feature(models.Model):
     def __str__(self):
         return self.name
 
-from django.db import models
 
 class BlogSection(models.Model):
     title = models.CharField(max_length=50)
@@ -125,6 +128,7 @@ class BlogSection(models.Model):
     def __str__(self):
         return self.title
 
+
 class BlogWindow(models.Model):
     main_title = models.CharField(max_length=50)
     main_description = models.CharField(max_length=255)
@@ -132,4 +136,3 @@ class BlogWindow(models.Model):
 
     def __str__(self):
         return self.main_title
-
