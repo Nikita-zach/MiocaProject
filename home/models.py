@@ -27,6 +27,7 @@ class Category(models.Model):
 class Products(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
+    prod_information = models.TextField(blank=True,null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount_price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
@@ -55,6 +56,13 @@ class Products(models.Model):
 
     def __str__(self):
         return self.name
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='product_images/')
+
+    def __str__(self):
+        return f"Image for {self.product.name}"
 
 
 class Review(models.Model):
