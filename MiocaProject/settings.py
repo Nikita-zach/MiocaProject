@@ -32,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +45,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payments.apps.PaymentsConfig',
     'product.apps.ProductConfig',
-    'user_authorization.apps.UserAuthorizationConfig',
+    'accounts.apps.UserAuthorizationConfig',
     'wishlist.apps.WishlistConfig',
     'home.apps.HomeConfig'
 ]
@@ -87,13 +86,9 @@ WSGI_APPLICATION = 'MiocaProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mioca_db',
-        'USER': 'mioca_user',
-        'PASSWORD': 'mypassword',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'mioca_db.sqlite3',
     }
 }
 
@@ -142,6 +137,7 @@ urlpatterns = [
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+AUTH_USER_MODEL = 'accounts.UserModel'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

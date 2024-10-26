@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from MiocaProject import settings
+
 
 class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
@@ -65,24 +67,37 @@ class ProductImage(models.Model):
         return f"Image for {self.product.name}"
 
 
+from django.conf import settings
+from django.db import models
+
 class Review(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Review by {self.user.username} for {self.product.name}'
+        return f"Review by {self.user.get_username()} for {self.product.name}"
 
 
 class Cart(models.Model):
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Cart for {self.user.username}"
+        return f"Cart for {self.user.get_username()}"
+
+
+class Wishlist(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Wishlist for {self.user.get_username()}"
+
 
 
 class CartItem(models.Model):
@@ -92,15 +107,6 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} (x{self.quantity})"
-
-
-class Wishlist(models.Model):
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"Wishlist for {self.user.username}"
 
 
 class WishlistItem(models.Model):
@@ -144,3 +150,12 @@ class BlogWindow(models.Model):
 
     def __str__(self):
         return self.main_title
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.question
