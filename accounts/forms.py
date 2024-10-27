@@ -10,3 +10,9 @@ class NewUserCreationForm(UserCreationForm):
     class Meta:
         model = UserModel
         fields = ("username", "email", "password1", "password2", "city", "country", "address")
+
+
+class AccountUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ['first_name', 'last_name', 'email']

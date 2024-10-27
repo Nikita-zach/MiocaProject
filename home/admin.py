@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Category, Products, Cart, CartItem, Wishlist, WishlistItem
+from product.models import Category,Products
+from cart.models import Cart, CartItem
+from wishlist.models import WishlistItem, Wishlist
 
 class CartItemInline(admin.TabularInline):
     model = CartItem

@@ -47,7 +47,11 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'accounts.apps.UserAuthorizationConfig',
     'wishlist.apps.WishlistConfig',
-    'home.apps.HomeConfig'
+    'home.apps.HomeConfig',
+    'blog.apps.BlogConfig',
+    'compare.apps.CompareConfig',
+    'info_pages.apps.InfoPagesConfig',
+    'contact.apps.ContactConfig'
 ]
 
 MIDDLEWARE = [

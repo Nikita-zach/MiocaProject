@@ -16,10 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
+from accounts.views import login_register_view, account_dashboard
+from blog.views import blog_detail, blog_list_view
+from compare.views import product_compare_view
 from home import views
+from payments.views import checkout_view, thank_you_view
+from product.views import product_detail_view, shop_view
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
-    #path('', views.home, name='home'),
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('product/<int:product_id>/', product_detail_view, name='product_detail'),
+    path('shop/', shop_view, name='shop'),
+    path('blog/<int:blog_id>/', blog_detail, name='blog_detail'),
+    path('blogs/<int:blog_window_id>/', blog_list_view, name='blog_list'),
+    path('compare/', product_compare_view, name='product_compare'),
+    path('login/', login_register_view, name='login_register'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login_register'), name='logout'),
+    path('checkout/', checkout_view, name='checkout'),
+    path('thank-you/', thank_you_view, name='thank_you'),
+    path('account/', account_dashboard, name='account_dashboard'),
+
 ]

@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Products, Cart, Wishlist
+from product.models import Category, Products
+from cart.models import Cart
+from wishlist.models import Wishlist
+
 
 def home(request):
     categories = Category.objects.filter(is_visible=True).order_by('sort')
@@ -44,9 +47,3 @@ def home(request):
     }
 
     return render(request, "index.html", context)
-
-
-
-
-def thanks(request):
-    return render(request, 'thanks.html')
