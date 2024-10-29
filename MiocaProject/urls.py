@@ -23,6 +23,7 @@ from compare.views import product_compare_view
 from home import views
 from payments.views import checkout_view, thank_you_view
 from product.views import product_detail_view, shop_view
+from info_pages.views import faq_view, custom_404_view, privacy_policy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,5 +38,8 @@ urlpatterns = [
     path('checkout/', checkout_view, name='checkout'),
     path('thank-you/', thank_you_view, name='thank_you'),
     path('account/', account_dashboard, name='account_dashboard'),
+    path('faq/', faq_view, name='faq'),
+    path('privacy-policy/', privacy_policy, name='privacy_policy'),
 
 ]
+handler404 = custom_404_view
