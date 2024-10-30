@@ -19,11 +19,13 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from accounts.views import login_register_view, account_dashboard
 from blog.views import blog_detail, blog_list_view
+from cart.views import remove_from_cart
 from compare.views import product_compare_view
 from home import views
 from payments.views import checkout_view, thank_you_view
 from product.views import product_detail_view, shop_view
-from info_pages.views import faq_view, custom_404_view, privacy_policy
+from info_pages.views import faq_view, custom_404_view, privacy_policy, about_page
+from wishlist.views import remove_from_wishlist
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,6 +42,9 @@ urlpatterns = [
     path('account/', account_dashboard, name='account_dashboard'),
     path('faq/', faq_view, name='faq'),
     path('privacy-policy/', privacy_policy, name='privacy_policy'),
+    path('about/', about_page, name='about'),
+    path('remove-from-cart/<int:product_id>/', remove_from_cart, name='remove_from_cart'),
+    path('remove-from-wishlist/<int:product_id>/', remove_from_wishlist, name='remove_from_wishlist'),
 
 ]
 handler404 = custom_404_view

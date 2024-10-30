@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from product.models import Category, Products
 from cart.models import Cart
 from wishlist.models import Wishlist
-
+from .forms import NewsletterForm
 
 def home(request):
     categories = Category.objects.filter(is_visible=True).order_by('sort')
@@ -47,3 +47,17 @@ def home(request):
     }
 
     return render(request, "index.html", context)
+
+def subscribe_newsletter(request):
+    message = None
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            message = "Thank you! You have successfully subscribed to the newsletter."
+        else:
+            message = "Please enter a valid email address."
+    else:
+        form = NewsletterForm()
+
+    return render(request, 'includes/footer.html', {'form': form, 'message': message})
