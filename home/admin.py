@@ -1,13 +1,24 @@
 from django.contrib import admin
-from product.models import Category,Products
+from .models import Feature, NewsletterSubscriber
+from wishlist.models import Wishlist, WishlistItem
+from product.models import Products, ProductImage, Category, Review
 from cart.models import Cart, CartItem
-from wishlist.models import WishlistItem, Wishlist
+from info_pages.models import FAQ, Testimonials, Stuff, BrandIcons, ServiceSection
+from payments.models import Order
+from accounts.models import UserModel
+from contact.models import ContactMessage
+from blog.models import BlogWindow, BlogSection, Comment
+
 
 class CartItemInline(admin.TabularInline):
     model = CartItem
     extra = 1
     show_change_link = True
 
+class WishlistItemInline(admin.TabularInline):
+    model = WishlistItem
+    extra = 1
+    show_change_link = True
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -29,6 +40,72 @@ class ProductsAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
 
 
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('product', 'image')
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('product', 'user', 'rating', 'created_at')
+    list_filter = ('product', 'user', 'rating', 'created_at')
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'created_at', 'total_price', 'payment_method')
+    list_filter = ('created_at', 'payment_method')
+    date_hierarchy = 'created_at'
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question', 'created_at', 'updated_at')
+    search_fields = ('question',)
+    date_hierarchy = 'created_at'
+
+
+@admin.register(ServiceSection)
+class ServiceSectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'subtitle_1', 'subtitle_2', 'created_at', 'updated_at')
+    search_fields = ('title', 'subtitle_1')
+    date_hierarchy = 'created_at'
+
+
+@admin.register(Stuff)
+class StuffAdmin(admin.ModelAdmin):
+    list_display = ('name', 'profession', 'is_visible', 'created', 'updated')
+    list_editable = ('is_visible',)
+    list_filter = ('is_visible', 'created')
+    search_fields = ('name', 'profession')
+    date_hierarchy = 'created'
+
+
+@admin.register(Testimonials)
+class TestimonialsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'created_at', 'updated_at')
+    date_hierarchy = 'created_at'
+
+
+@admin.register(BrandIcons)
+class BrandIconsAdmin(admin.ModelAdmin):
+    list_display = ('image', 'created_at', 'updated_at')
+    date_hierarchy = 'created_at'
+
+
+@admin.register(Feature)
+class FeatureAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'created_at', 'updated_at')
+    date_hierarchy = 'created_at'
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at')
+    search_fields = ('name', 'email', 'subject')
+    date_hierarchy = 'created_at'
+
+
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     list_display = ('user', 'created_at', 'updated_at')
@@ -44,8 +121,36 @@ class CartItemAdmin(admin.ModelAdmin):
 @admin.register(Wishlist)
 class WishlistAdmin(admin.ModelAdmin):
     list_display = ('user', 'created_at', 'updated_at')
+    inlines = [WishlistItemInline]
 
 
-@admin.register(WishlistItem)
-class WishlistItemAdmin(admin.ModelAdmin):
-    list_display = ('wishlist', 'product')
+@admin.register(BlogSection)
+class BlogSectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'by_user', 'date')
+    search_fields = ('title', 'by_user')
+    date_hierarchy = 'date'
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('blog_section', 'name', 'email', 'date')
+    search_fields = ('name', 'email', 'message')
+    date_hierarchy = 'date'
+
+
+@admin.register(BlogWindow)
+class BlogWindowAdmin(admin.ModelAdmin):
+    list_display = ('main_title', 'main_description')
+    filter_horizontal = ('blogs',)
+
+
+@admin.register(UserModel)
+class UserModelAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'city', 'country')
+    search_fields = ('username', 'email')
+
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_at')
+    search_fields = ('email',)
+    date_hierarchy = 'created_at'

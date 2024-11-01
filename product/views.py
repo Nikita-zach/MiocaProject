@@ -1,7 +1,10 @@
-from .models import Products, Category,ProductImage, Review
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Avg
+from django.contrib.auth.decorators import login_required
 
+from cart.models import CartItem
+from .models import Products, Category,ProductImage, Review
+from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Avg
+from django.http import JsonResponse
 def shop_view(request):
     categories = Category.objects.filter(is_visible=True).order_by('sort')
 
@@ -57,3 +60,14 @@ def product_detail_view(request, product_id):
     }
 
     return render(request, 'single-product.html', context)
+
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Products, id=product_id)
+    cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return JsonResponse({'message':'Product has been added to cart'})

@@ -103,21 +103,22 @@
                                         <td class="first-column">Add to cart</td>
                                         {% for product in products %}
                                         <td class="pro-addtocart">
-                                            <a href="#" class="add-to-cart" tabindex="0">
+                                            <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart" tabindex="0">
                                                 <span>ADD TO CART</span>
                                             </a>
-                                        </td>
                                         {% endfor %}
                                     </tr>
-    
+
                                     <tr>
                                         <td class="first-column">Delete</td>
                                         {% for product in products %}
                                         <td class="pro-remove">
-                                            <button><i class="fa fa-trash-o"></i></button>
-                                        </td>
+                                            <button class="remove-from-cart" data-product-id="{{ product.id }}">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
                                         {% endfor %}
                                     </tr>
+
     
                                     <tr>
                                         <td class="first-column">Rating</td>
@@ -135,29 +136,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- Search Modal Start -->
-    <div class="modal popup-search-style" id="searchActive">
-        <button type="button" class="close-btn" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-        <div class="modal-overlay">
-            <div class="modal-dialog p-0" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h2>Search Your Product</h2>
-                        <form class="navbar-form position-relative" role="search">
-                            <div class="form-group">
-                                <label>
-                                    <input type="text" class="form-control" placeholder="Search here...">
-                                </label>
-                            </div>
-                            <button type="submit" class="submit-btn"><i class="pe-7s-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Search Modal End -->
     <!-- Global Vendor, plugins JS -->
 
     <!-- Vendor JS -->

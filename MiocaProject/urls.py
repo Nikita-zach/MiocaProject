@@ -20,12 +20,12 @@ from django.contrib.auth import views as auth_views
 from accounts.views import login_register_view, account_dashboard
 from blog.views import blog_detail, blog_list_view
 from cart.views import remove_from_cart
-from compare.views import product_compare_view
+from compare.views import product_compare_view, add_to_compare, remove_from_compare
 from home import views
 from payments.views import checkout_view, thank_you_view
-from product.views import product_detail_view, shop_view
+from product.views import product_detail_view, shop_view, add_to_cart
 from info_pages.views import faq_view, custom_404_view, privacy_policy, about_page
-from wishlist.views import remove_from_wishlist
+from wishlist.views import remove_from_wishlist, add_to_wishlist
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,7 +44,11 @@ urlpatterns = [
     path('privacy-policy/', privacy_policy, name='privacy_policy'),
     path('about/', about_page, name='about'),
     path('remove-from-cart/<int:product_id>/', remove_from_cart, name='remove_from_cart'),
+    path('add-to-cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    path('add-to-wishlist/<int:product_id>/', add_to_wishlist, name='add_to_wishlist'),
     path('remove-from-wishlist/<int:product_id>/', remove_from_wishlist, name='remove_from_wishlist'),
+    path('add-to-compare/<int:product_id>/', add_to_compare, name='add_to_compare'),
+    path('remove-from-compare/<int:product_id>/', remove_from_compare, name='remove_from_compare'),
 
 ]
 handler404 = custom_404_view
