@@ -1,4 +1,5 @@
 {% load static %}
+
 <!-- Header Area Start -->
 <header>
     <div class="header-main sticky-nav">
@@ -23,28 +24,39 @@
                     </div>
                 </div>
                 <div class="col-auto align-self-center">
-                    <div class="header-bottom-set dropdown">
-                        <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">
-                            <i class="pe-7s-users"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            {% if user.is_authenticated %}
-                                <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">My account</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
-                            {% else %}
-                                <li><a class="dropdown-item" href="{% url 'login_register' %}">Sign in</a></li>
+                    <div class="header-actions">
+                        <div class="header-bottom-set dropdown">
+                            <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">
+                                <i class="pe-7s-users"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                {% if user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">My account</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
+                                {% else %}
+                                    <li><a class="dropdown-item" href="{% url 'login_register' %}">Sign in</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
+                            <i class="pe-7s-like"></i>
+                        </a>
+                        <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+                            <i class="pe-7s-shopbag"></i>
+                            {% if cart_items.count > 0 %}
+                                <span class="header-action-num">{{ cart_items.count }}</span>
                             {% endif %}
-                        </ul>
+                        </a>
+                        <a href="#offcanvas-mobile-menu"
+                                class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
+                                <i class="pe-7s-menu"></i>
+                            </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </header>
-
-<!-- Header Area End -->
-<div class="offcanvas-overlay"></div>
 
 <!-- OffCanvas Wishlist Start -->
 <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
@@ -86,29 +98,34 @@
 </div>
 <!-- OffCanvas Wishlist End -->
 
+<div class="offcanvas-overlay"></div>
 
-<!-- OffCanvas Cart Start -->
 <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
     <div class="inner">
         <div class="head">
             <span class="title">Cart</span>
             <button class="offcanvas-close">×</button>
         </div>
+
         <div class="body customScroll">
             {% if user.is_authenticated %}
                 {% if cart_items %}
                     <ul class="minicart-product-list">
                         {% for item in cart_items %}
-                            <li>
-                                <a href="{% url 'product_detail' item.product.id %}" class="image">
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                </a>
-                                <div class="content">
-                                    <a href="{% url 'product_detail' item.product.id %}" class="title">{{ item.product.name }}</a>
-                                    <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.product.price }}</span></span>
-                                    <a href="{% url 'remove_from_cart' item.product.id %}" class="remove">×</a>
-                                </div>
-                            </li>
+                            {% if item.product and item.product.id %}
+                                <li>
+                                    <a href="{% url 'product_detail' item.product.id %}" class="image">
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    </a>
+                                    <div class="content">
+                                        <a href="{% url 'product_detail' item.product.id %}" class="title">{{ item.product.name }}</a>
+                                        <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.product.price }}</span></span>
+                                        <a href="{% url 'remove_from_cart' item.product.id %}" class="remove">×</a>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li><p>Product not available.</p></li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 {% else %}
@@ -118,12 +135,51 @@
                 <p>Sorry, first you'll need to sign in.</p>
             {% endif %}
         </div>
+
         <div class="foot">
-            <div class="buttons">
-                <a href="{% url 'cart' %}" class="btn btn-dark btn-hover-primary mt-30px">View Cart</a>
-                <a href="{% url 'checkout' %}" class="btn btn-dark btn-hover-primary mt-30px">Checkout</a>
+            <div class="buttons mt-30px">
+                <a href="{% url 'cart' %}" class="btn btn-dark btn-hover-primary mb-30px">View Cart</a>
+                <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn">Checkout</a>
             </div>
         </div>
     </div>
 </div>
-<!-- OffCanvas Cart End -->
+
+
+<!-- OffCanvas Menu Start -->
+<div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
+    <button class="offcanvas-close"></button>
+
+    <div class="inner customScroll">
+        <div class="offcanvas-menu mb-4">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'shop' %}">Shop</a></li>
+                <li><a href="{% url 'blog_list' blog_window_id=1 %}">Blog</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+        <!-- OffCanvas Menu End -->
+        <div class="offcanvas-social mt-auto">
+            <ul>
+                <li>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-google"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- OffCanvas Menu End -->

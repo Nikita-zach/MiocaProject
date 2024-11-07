@@ -14,18 +14,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from django.contrib.auth import views as auth_views
-from accounts.views import login_register_view, account_dashboard
-from blog.views import blog_detail, blog_list_view
-from cart.views import remove_from_cart
+from accounts.views import login_register_view, account_dashboard, logout
+from blog.views import blog_detail, blog_list_view, add_comment
+from cart.views import remove_from_cart, cart_view, add_to_cart
 from compare.views import product_compare_view, add_to_compare, remove_from_compare
+from contact.views import contact_view
 from home import views
 from payments.views import checkout_view, thank_you_view
-from product.views import product_detail_view, shop_view, add_to_cart
-from info_pages.views import faq_view, custom_404_view, privacy_policy, about_page
-from wishlist.views import remove_from_wishlist, add_to_wishlist
+from product.views import product_detail_view, shop_view
+from info_pages.views import faq_view, privacy_policy, about_page
+from wishlist.views import remove_from_wishlist, add_to_wishlist, wishlist_view
+
+
+handler404 = 'info_pages.views.custom_404_view'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,8 +40,11 @@ urlpatterns = [
     path('blog/<int:blog_id>/', blog_detail, name='blog_detail'),
     path('blogs/<int:blog_window_id>/', blog_list_view, name='blog_list'),
     path('compare/', product_compare_view, name='product_compare'),
+    path('cart/', cart_view, name='cart'),
+    path('wishlist/', wishlist_view, name='wishlist'),
+    path('contact/', contact_view, name='contact'),
     path('login/', login_register_view, name='login_register'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login_register'), name='logout'),
+    path('logout', logout, name='logout'),
     path('checkout/', checkout_view, name='checkout'),
     path('thank-you/', thank_you_view, name='thank_you'),
     path('account/', account_dashboard, name='account_dashboard'),
@@ -49,6 +57,7 @@ urlpatterns = [
     path('remove-from-wishlist/<int:product_id>/', remove_from_wishlist, name='remove_from_wishlist'),
     path('add-to-compare/<int:product_id>/', add_to_compare, name='add_to_compare'),
     path('remove-from-compare/<int:product_id>/', remove_from_compare, name='remove_from_compare'),
-
+    path('blog/<int:blog_id>/add_comment/', add_comment, name='add_comment'),
 ]
-handler404 = custom_404_view
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

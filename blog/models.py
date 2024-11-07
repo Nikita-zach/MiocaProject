@@ -2,13 +2,14 @@ from django.db import models
 
 class BlogSection(models.Model):
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=255)
+    blog_text = models.TextField(null=True, blank=True)
+    blog_text_2 = models.TextField(null=True, blank=True)
     main_image = models.ImageField(upload_to='blog/')
     date = models.DateField(auto_now_add=True)
     by_user = models.CharField(max_length=50)
 
     testimonial = models.ImageField(upload_to='testimonial/')
-    t_comment = models.TextField(blank=True, null=True)
+    t_comment = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -16,10 +17,9 @@ class BlogSection(models.Model):
 class Comment(models.Model):
     blog_section = models.ForeignKey(BlogSection, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    email = models.EmailField()
-    message = models.TextField()
+    message = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-
+    is_visible = models.BooleanField(default=True)
     def __str__(self):
         return f"Comment by {self.name} on {self.date}"
 

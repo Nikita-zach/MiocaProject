@@ -53,7 +53,7 @@
                                 </div>
                                 <h4 class="blog-title">{{ blog_section.title }}</h4>
                                 <p data-aos="fade-up">
-                                    {{ blog_section.description }}
+                                    {{ blog_section.blog_text }}
                                 </p>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="testimonial-content">
                             <div class="quate-speech-area">
                                 <p class="quate-speech" data-aos="fade-up" data-aos-delay="200">
-                                    {{ blog_section.t_comment|default:"No testimonials available." }} <!-- Display testimonial comment -->
+                                    {{ blog_section.t_comment|default:"No testimonials available." }}
                                 </p>
                                 {% if blog_section.testimonial %}
                                     <img src="{{ blog_section.testimonial.url }}" alt="Testimonial" class="speecker-img">
@@ -96,9 +96,6 @@
                                                 <p>
                                                     {{ comment.message }}
                                                 </p>
-                                                <div class="review-left">
-                                                    <a href="#"><i class="fa fa-reply-all"></i> Reply</a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -142,9 +139,6 @@
         </div>
     </div>
     <!-- Blog Area End -->
-
-
-
 
     {% include 'includes/footer.html' %}
 

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="robots" content="index, follow" />
-    <title>Mioca - Handmade Goods eCommerce HTML Template</title>
+    <title>{{ product.name }}</title>
     <meta name="description" content="Mioca - Handmade Goods eCommerce HTML Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -67,8 +67,12 @@
                         </div>
                         <div class="pro-details-rating-wrap">
                             <div class="rating-product">
-                                {% for i in 1|range_filter:5 %}
-                                    <i class="fa fa-star{% if average_rating < i %}-o{% endif %}"></i>
+                                {% for i in 1|range_filter:6 %}
+                                    {% if average_rating < i %}
+                                        <i class="fa fa-star-o"></i>
+                                     {% else %}
+                                        <i class="fa fa-star"></i>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                             <span class="read-review"><a class="reviews" href="#">( {{ product.reviews.count }} Reviews )</a></span>
@@ -76,10 +80,13 @@
                         <p class="mt-30px mb-0">{{ product.description }}</p>
                         <div class="pro-details-quality">
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                                <input class="cart-plus-minus-box" type="number" name="qtybutton" value="1" min="1" />
                             </div>
                             <div class="pro-details-cart">
-                                <button class="add-cart" data-product-id="{{ product.id }}">Add To Cart</button>
+                                <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button class="add-cart" type="submit">Add To Cart</button>
+                                </form>
                             </div>
                             <div class="pro-details-compare-wishlist pro-details-wishlist">
                                 <a href="{% url 'add_to_wishlist' product.id %}"><i class="pe-7s-like"></i></a>
@@ -100,7 +107,6 @@
     </div>
     <!-- Product Details Area End -->
 
-    <!-- Product Description Area Start -->
     <div class="description-review-area pb-100px" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="description-review-wrapper">
@@ -112,55 +118,76 @@
                 <div class="tab-content description-review-bottom">
                     <div id="des-details2" class="tab-pane">
                         <div class="product-anotherinfo-wrapper text-start">
-                            <ul>
-                                {{ product.prod_information|safe }}
-                            </ul>
+                            <p>{{ product.description }}</p>
                         </div>
                     </div>
                     <div id="des-details1" class="tab-pane active">
                         <div class="product-description-wrapper">
-                            <p>{{ product.description }}</p>
+                            <p>{{ product.prod_information|safe }}</p>
                         </div>
                     </div>
                     <div id="des-details3" class="tab-pane">
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="review-wrapper">
-                                    <!-- Review List Here -->
+                                    {% for review in product.reviews.all %}
+                                        <div class="single-review child-review">
+                                            <div class="review-content">
+                                                <div class="review-top-wrap">
+                                                    <div class="review-left">
+                                                        <div class="review-name">
+                                                            <h4>{{ review.name }}</h4>
+                                                        </div>
+                                                        <div class="rating-product">
+                                                            {% for i in 0|range_filter:review.rating %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+                                                            {% for i in review.rating|add:1|range_filter:5 %}
+                                                                <i class="fa fa-star-o"></i>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="review-bottom">
+                                                    <p>{{ review.message }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <p>No reviews yet.</p>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="col-lg-5">
                                 <div class="ratting-form-wrapper pl-50">
                                     <h3>Add a Review</h3>
                                     <div class="ratting-form">
-                                        <form action="#" method="POST">
+                                        <form action="{% url 'product_detail' product.id %}" method="POST">
+                                            {% csrf_token %}
+                                            {{ review_form.non_field_errors }}
                                             <div class="star-box">
                                                 <span>Your rating:</span>
-                                                <div class="rating-product">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
+                                                {{ review_form.rating }}
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="rating-form-style">
-                                                        <input placeholder="Name" type="text" name="name" />
+                                                        {{ review_form.name }}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="rating-form-style">
-                                                        <input placeholder="Email" type="email" name="email" />
+                                                        {{ review_form.email }}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="rating-form-style form-submit">
-                                                        <textarea name="message" placeholder="Message"></textarea>
-                                                        <button class="btn btn-primary btn-hover-color-primary " type="submit" value="Submit">Submit</button>
+                                                    <div class="rating-form-style">
+                                                        {{ review_form.message }}
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="rating-form-style form-submit">
+                                                <button class="btn btn-primary btn-hover-color-primary" type="submit">Submit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -172,7 +199,7 @@
             </div>
         </div>
     </div>
-    <!-- Product Description Area End -->
+
 
     <!-- Related product Area Start -->
     <div class="related-product-area">
@@ -181,9 +208,7 @@
                 <div class="col-12">
                     <div class="section-title text-center line-height-1">
                         <h2 class="title">Related Products</h2>
-                        <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            incididunt ut labore et dolore magna aliqua.
-                        </p>
+                        <p class="sub-title">Also,you may be interested in similar products.</p>
                     </div>
                 </div>
             </div>
@@ -193,12 +218,12 @@
                     <div class="new-product-item swiper-slide">
                         <div class="product">
                             <div class="thumb">
-                                <a href="single-product/{{ product.id }}" class="image">
+                                <a href="{% url 'product_detail' product.id %}" class="image">
                                     <img src="{{ product.image.url }}" alt="{{ product.name }}" />
                                     <img class="hover-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
                                 </a>
                                 <div class="actions">
-                                    <a href="single-product/{{ product.id }}" class="action">
+                                    <a href="{% url 'product_detail' product.id %}" class="action">
                                         <i class="pe-7s-look"></i>
                                     </a>
                                     <a href="{% url 'add_to_wishlist' product.id %}" class="action">
@@ -207,7 +232,7 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <h3 class="title"><a href="single-product/{{ product.id }}">{{ product.name }}</a></h3>
+                                <h3 class="title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
                                 <div class="pricing-meta">
                                     <ul>
                                         <li class="new-price">${{ product.price }}</li>

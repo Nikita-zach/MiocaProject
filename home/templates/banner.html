@@ -1,16 +1,40 @@
-<div class="container">
-    <div class="row">
-        {% for product in discounted_products|slice:":3" %}
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="product-item">
-                <div class="product-thumb">
-                    <a href="{% url 'single_product' product.id %}"><img src="{{ product.photo.url }}" alt="{{ product.name }}"></a>
+<!-- Banner Area Start -->
+<div class="banner-area pt-100px pb-100px">
+    <div class="container">
+        <div class="row">
+            <div class="single-col">
+                <div class="single-banner">
+                    <img src="{{ banners.0.image.url }}" alt="{{ banners.0.title }}">
+                    <div class="banner-content">
+                        <span class="category">{{ banners.0.category }}</span>
+                        <span class="title">{{ banners.0.title }}</span>
+                        <a href="{% url 'shop' %}" class="shop-link btn btn-primary text-uppercase">Shop Now</a>
+                    </div>
                 </div>
-                <div class="product-content">
-                    <h4><a href="{% url 'single_product' product.id %}">Buy now</a></h4>
+            </div>
+
+            <div class="single-col center-col">
+                <div class="single-banner">
+                    <img src="{{ banners.1.image.url }}" alt="{{ banners.1.title }}">
+                    <div class="banner-content">
+                        <span class="category">{{ banners.1.category }}</span>
+                        <span class="title">{{ banners.1.title }}</span>
+                        <a href="{% url 'shop' %}" class="shop-link btn btn-primary text-uppercase">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="single-col">
+                <div class="single-banner">
+                    <img src="{{ banners.2.image.url }}" alt="{{ banners.2.title }}">
+                    <div class="banner-content">
+                        <span class="category">{{ banners.2.category }}</span>
+                        <span class="title">{{ banners.2.title }}</span>
+                        <a href="{% url 'shop' %}" class="shop-link btn btn-primary text-uppercase">Shop Now</a>
+                    </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 </div>
+<!-- Banner Area End -->

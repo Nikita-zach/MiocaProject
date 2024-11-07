@@ -1,31 +1,35 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from .models import CompareItem
+from django.shortcuts import get_object_or_404, render
 from product.models import Products
 
 @login_required
 def add_to_compare(request, product_id):
     product = get_object_or_404(Products, id=product_id)
 
-    compare_item, created = CompareItem.objects.get_or_create(user=request.user, product=product)
+    compare_list = request.session.get('compare_list', [])
 
-    if created:
+    if str(product.id) not in compare_list:
+        compare_list.append(str(product.id))
+        request.session['compare_list'] = compare_list
         message = "Product has been added to compare list"
     else:
         message = "Product already added to compare list"
 
     return JsonResponse({'message': message})
 
+@login_required
 def remove_from_compare(request, product_id):
     if request.method == "GET":
         product = get_object_or_404(Products, id=product_id)
 
-        try:
-            compare_item = CompareItem.objects.get(user=request.user, product=product)
-            compare_item.delete()
+        compare_list = request.session.get('compare_list', [])
+
+        if str(product.id) in compare_list:
+            compare_list.remove(str(product.id))
+            request.session['compare_list'] = compare_list
             return JsonResponse({'message': 'Product removed from compare successfully!'})
-        except CompareItem.DoesNotExist:
+        else:
             return JsonResponse({'message': 'Product not found in compare list.'}, status=404)
 
     return JsonResponse({'message': 'Invalid request method.'}, status=400)

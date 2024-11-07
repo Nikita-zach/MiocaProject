@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="robots" content="index, follow" />
-    <title>Mioca - Handmade Goods eCommerce HTML Template</title>
+    <title>Account Dashboard</title>
     <meta name="description" content="Mioca - Handmade Goods eCommerce HTML Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -98,7 +98,7 @@
                                 <div class="login">
                                     <div class="login_form_container">
                                         <div class="account_login_form">
-                                            <form action="{% url 'account_update' %}" method="POST">
+                                            <form action="{% url 'account_dashboard' %}" method="POST">
                                                 {% csrf_token %}
                                                 <div class="input-radio">
                                                     <span class="custom-radio"><input type="radio" value="1" name="id_gender" {% if user.id_gender == 1 %}checked{% endif %}> Mr.</span>

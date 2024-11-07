@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogWindow, BlogSection, Comment
 
@@ -26,3 +27,17 @@ def blog_list_view(request, blog_window_id):
     }
 
     return render(request, 'blog-search.html', context)
+
+def add_comment(request, blog_id):
+    if request.method == "POST":
+        blog_section = get_object_or_404(BlogSection, id=blog_id)
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        comment = Comment(blog_section=blog_section, name=name, email=email, message=message)
+        comment.save()
+
+        return redirect('blog_detail', blog_id=blog_id)
+
+    return HttpResponse(status=400)

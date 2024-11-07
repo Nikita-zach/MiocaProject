@@ -1,36 +1,4 @@
 {% load static %}
-<div class="newsletter-area">
-    <div class="container line-shape-bottom">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="newsletter-content mb-lm-30px">
-                    <i class="pe-7s-mail-open-file"></i>
-                    <div class="newsletter-text">
-                        <h3 class="title">Subscribe to our Newsletter & Get Updates</h3>
-                        <p>Sign up for our newsletter to receive updates from us.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="news-letter-form">
-                    <form method="POST" action="{% url 'subscribe_newsletter' %}">
-                        {% csrf_token %}
-                        <div class="mc-form">
-                            {{ form.email }}
-                            <div class="clear">
-                                <button id="mc-embedded-subscribe" class="button" type="submit">Subscribe</button>
-                            </div>
-                        </div>
-                    </form>
-                    {% if message %}
-                        <div class="alert alert-info">{{ message }}</div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Footer Area Start -->
 <div class="footer-area">
@@ -59,8 +27,8 @@
                                 <div class="footer-row">
                                     <ul class="align-items-center">
                                         <li class="li"><a class="single-link" href="{% url 'account_dashboard' %}">My account</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'checkout' %}">My orders</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'shop' %}">Wishlist</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'account_dashboard' %}">My orders</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'wishlist' %}">Wishlist</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -73,7 +41,7 @@
                                 <div class="footer-row">
                                     <ul class="align-items-center">
                                         <li class="li"><a class="single-link" href="{% url 'shop' %}">Go shopping</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'checkout' %}">My cart</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'cart' %}">My cart</a></li>
                                         <li class="li"><a class="single-link" href="{% url 'contact' %}">Contact us</a></li>
                                     </ul>
                                 </div>

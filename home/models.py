@@ -20,3 +20,24 @@ class NewsletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+class Banner(models.Model):
+    image = models.ImageField(upload_to='banners/')
+    category = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+
+    is_visible = models.BooleanField(default=True)
+    sort = models.IntegerField(default=0)
+    def __str__(self):
+        return self.title
+
+class Deal(models.Model):
+    background_image = models.ImageField(upload_to='deals/')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Slider(models.Model):
+    background_image = models.ImageField(upload_to='sliders/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

@@ -1,7 +1,11 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout as auth_logout
+from django.contrib.auth.context_processors import auth
 from .forms import NewUserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from payments.models import Order
+from .forms import AccountUpdateForm
 
 def login_register_view(request):
     if request.method == 'POST':
@@ -34,11 +38,6 @@ def login_register_view(request):
         'messages': messages.get_messages(request),
     })
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from payments.models import Order
-from .forms import AccountUpdateForm
 
 @login_required
 def account_dashboard(request):
@@ -61,3 +60,7 @@ def account_dashboard(request):
         'form': form
     }
     return render(request, 'my-account.html', context)
+
+def logout(request):
+    auth_logout(request)
+    return redirect('home')

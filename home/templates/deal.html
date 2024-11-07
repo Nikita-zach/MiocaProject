@@ -1,13 +1,12 @@
-<!-- Deal Area Start -->
 <div class="deal-area pb-100px pt-100px">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="deal-inner deal-bg position-relative ptb-80px"
-                     data-bg-image="{{ discounted_products.first.category.icon.url }}">
+                     style="background-image: url('{{ deal.background_image.url }}');">
                     <div class="deal-wrapper">
                         <h3 class="title">{{ discounted_products.first.name }} <br>
-                            & Offer Sale - {{ discounted_products.first.discount_percentage|default:0 }}%</h3>
+                            & Offer Sale - {{ discounted_products.first.discount_percentage|floatformat:0 }}%</h3>
                         <span class="price">
                             <span class="old"> <del>${{ discounted_products.first.price|floatformat:2 }}</del></span>
                             <span class="new">- ${{ discounted_products.first.final_price|floatformat:2 }}</span>
@@ -17,7 +16,7 @@
                     <div class="deal-image">
                         <img class="img-fluid" src="{{ discounted_products.first.photo.url }}" alt="{{ discounted_products.first.name }}">
                         <div class="discount">
-                            <h3>-{{ discounted_products.first.discount_percentage|default:0 }}%</h3>
+                            <h3>-{{ discounted_products.first.discount_percentage|floatformat:0 }}%</h3>
                         </div>
                     </div>
                 </div>
@@ -25,4 +24,3 @@
         </div>
     </div>
 </div>
-<!-- Deal Area End -->

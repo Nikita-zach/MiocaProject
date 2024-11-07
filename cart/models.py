@@ -1,7 +1,6 @@
 from django.db import models
-from MiocaProject import settings
+from django.conf import settings
 from product.models import Products
-
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -10,6 +9,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart for {self.user.get_username()}"
+
+    def get_items(self):
+        return {item.product.id: item.quantity for item in self.items.all()}
+
+    def total_price(self):
+        return sum(item.product.price * item.quantity for item in self.items.all())
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
