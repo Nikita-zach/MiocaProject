@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="robots" content="index, follow" />
-    <title>Account Dashboard</title>
+    <title>My Orders</title>
     <meta name="description" content="Mioca - Handmade Goods eCommerce HTML Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -25,22 +25,23 @@
     <link rel="stylesheet" href="{% static 'css/plugins/nice-select.css' %}" />
     <link rel="stylesheet" href="{% static 'css/plugins/venobox.css' %}" />
 
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <link rel="stylesheet" href="{ static 'css/vendor/vendor.min.css' %}" />
-    <link rel="stylesheet" href="{ static 'css/plugins/plugins.min.css' %}" />
-    <link rel="stylesheet" href="{ static 'css/style.min.css' %}"> -->
-
     <!-- Main Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
+    <style>
+
+        .account-dashboard {
+            margin-top: 0;
+            padding-top: 0;
+            min-height: 42vh;
+        }
+    </style>
 
 </head>
 
 <body>
 
-
     {% include 'includes/header.html' %}
-
 
     <!-- account area start -->
     <div class="account-dashboard pt-100px pb-100px">
@@ -51,7 +52,6 @@
                     <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
                         <ul role="tablist" class="nav flex-column dashboard-list">
                             <li><a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>
-                            <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Account details</a></li>
                             <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
                         </ul>
                     </div>
@@ -69,18 +69,16 @@
                                             <th>Date</th>
                                             <th>Status</th>
                                             <th>Total</th>
-                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% if orders %}
                                             {% for order in orders %}
                                                 <tr>
-                                                    <td>{{ order.id }}</td>
-                                                    <td>{{ order.created_at|date:"F j, Y" }}</td>
+                                                    <td>{{ order.order_number }}</td>
+                                                    <td>{{ order.date }}</td>
                                                     <td><span class="success">{{ order.status }}</span></td>
-                                                    <td>${{ order.total_price }} (Shipping: ${{ order.shipping_cost }})</td>
-                                                    <td><a href="{% url 'order_detail' order.id %}" class="view">view</a></td>
+                                                    <td>${{ order.total_price }} for {{ order.total_quantity }} {% if order.total_quantity > 1 %}items{% else %}item{% endif %}</td>
                                                 </tr>
                                             {% endfor %}
                                         {% else %}
@@ -189,10 +187,6 @@
     <script src="{% static 'js/plugins/jquery.zoom.min.js' %}"></script>
     <script src="{% static 'js/plugins/venobox.min.js' %}"></script>
     <script src="{% static 'js/plugins/ajax-mail.js' %}"></script>
-
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <script src="{% static 'js/vendor/vendor.min.js' %}"></script>
-    <script src="{% static 'js/plugins/plugins.min.js' %}"></script> -->
 
     <!-- Main Js -->
     <script src="{% static 'js/main.js' %}"></script>

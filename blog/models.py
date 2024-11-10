@@ -1,9 +1,10 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 class BlogSection(models.Model):
-    title = models.CharField(max_length=50)
-    blog_text = models.TextField(null=True, blank=True)
-    blog_text_2 = models.TextField(null=True, blank=True)
+    title = models.CharField(max_length=100)
+    blog_text = HTMLField(null=True, blank=True)
+    blog_text_2 = HTMLField(null=True, blank=True)
     main_image = models.ImageField(upload_to='blog/')
     date = models.DateField(auto_now_add=True)
     by_user = models.CharField(max_length=50)

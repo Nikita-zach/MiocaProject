@@ -5,12 +5,14 @@ from .forms import ReviewForm
 from .models import Products, Category, ProductImage, Review
 from django.db.models import Avg, Count
 
+
 def shop_view(request):
     categories = Category.objects.filter(is_visible=True).order_by('sort')
 
     selected_category_slug = request.GET.get('category', 'all')
+
     min_price = request.GET.get('min_price', '0')
-    max_price = request.GET.get('max_price', None)
+    max_price = request.GET.get('max_price', '9999')
 
     products_query = Products.objects.filter(is_visible=True)
 
@@ -23,13 +25,11 @@ def shop_view(request):
     except InvalidOperation:
         min_price = Decimal('0')
 
-    if max_price:
-        try:
-            max_price = Decimal(max_price)
-            products_query = products_query.filter(price__lte=max_price)
-        except InvalidOperation:
-            max_price = None
-
+    try:
+        max_price = Decimal(max_price)
+        products_query = products_query.filter(price__lte=max_price)
+    except InvalidOperation:
+        max_price = Decimal('9999')
     products = products_query.annotate(
         average_rating=Avg('reviews__rating'),
         reviews_count=Count('reviews')
@@ -44,6 +44,7 @@ def shop_view(request):
     }
 
     return render(request, 'shop.html', context)
+
 
 def product_detail_view(request, product_id):
     product = get_object_or_404(Products, id=product_id)

@@ -14,10 +14,7 @@
                         <a href="{% url 'add_to_cart' discounted_products.first.id %}" class="btn btn-lg btn-primary">Add To Cart</a>
                     </div>
                     <div class="deal-image">
-                        <img class="img-fluid" src="{{ discounted_products.first.photo.url }}" alt="{{ discounted_products.first.name }}">
-                        <div class="discount">
-                            <h3>-{{ discounted_products.first.discount_percentage|floatformat:0 }}%</h3>
-                        </div>
+                        <img class="img-fluid" src="{{ discounted_products.first.photo.url }}" alt="{{ discounted_products.first.name }}" style="width: 350px; height: 350px; object-fit: contain;">
                     </div>
                 </div>
             </div>

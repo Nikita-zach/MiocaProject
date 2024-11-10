@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="robots" content="index, follow" />
-    <title>Mioca - Handmade Goods eCommerce HTML Template</title>
+    <title>{{blog_section.title}}</title>
     <meta name="description" content="Mioca - Handmade Goods eCommerce HTML Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -35,10 +35,26 @@
 
     {% include 'includes/header.html' %}
 
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="breadcrumb-title">{{ blog_section.title }}</h2>
+                    <!-- breadcrumb-list start -->
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog_list' 1 %}">Blog List</a></li>
+                        <li class="breadcrumb-item active">Our Blog</li>
+                    </ul>
+                    <!-- breadcrumb-list end -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Blog Area Start -->
     <div class="blog-grid pb-100px pt-100px main-blog-page single-blog-page">
-        <div class="container">
+        <div class="container" style="width: 100%; max-width: 100%; padding: 0;">
             <div class="row">
                 <div class="col-lg-8 col-md-12 offset-lg-2">
                     <div class="blog-posts">
@@ -52,26 +68,20 @@
                                     <span class="blog-date">{{ blog_section.date|date:"d F, Y" }}</span>
                                 </div>
                                 <h4 class="blog-title">{{ blog_section.title }}</h4>
-                                <p data-aos="fade-up">
-                                    {{ blog_section.blog_text }}
-                                </p>
+                                <p data-aos="fade-up">{{ blog_section.blog_text|safe }}</p>
+                                </div>
+                                <div class="single-post-content">
+                                    <div class="quate-speech-area">
+
+                                        <p class="quate-speech" data-aos="fade-up" data-aos-delay="200">
+                                           {{ blog_section.t_comment }}
+                                        </p>
+                                        <img src="{{ blog_section.testimonial.url }}" alt="" class="speecker-img">
+                                    </div>
+                                <p data-aos="fade-up" data-aos-delay="200">{{ blog_section.blog_text_2|safe }}</p>
                             </div>
                         </div>
                         <!-- single blog post -->
-                    </div>
-
-                    <div class="testimonial-area mt-50px">
-                        <h2 class="testimonial-heading" data-aos="fade-up" data-aos-delay="200">Testimonials</h2>
-                        <div class="testimonial-content">
-                            <div class="quate-speech-area">
-                                <p class="quate-speech" data-aos="fade-up" data-aos-delay="200">
-                                    {{ blog_section.t_comment|default:"No testimonials available." }}
-                                </p>
-                                {% if blog_section.testimonial %}
-                                    <img src="{{ blog_section.testimonial.url }}" alt="Testimonial" class="speecker-img">
-                                {% endif %}
-                            </div>
-                        </div>
                     </div>
 
                     <div class="comment-area">
@@ -80,9 +90,6 @@
                             {% if blog_section.comments.exists %}
                                 {% for comment in blog_section.comments.all %}
                                     <div class="single-review" data-aos="fade-up" data-aos-delay="200">
-                                        <div class="review-img">
-                                            <img src="{% static 'images/comment-image/1.png' %}" alt="" />
-                                        </div>
                                         <div class="review-content">
                                             <div class="review-top-wrap">
                                                 <div class="review-left">

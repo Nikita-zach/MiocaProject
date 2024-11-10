@@ -1,6 +1,6 @@
+from decimal import Decimal
+
 from django.db import models
-
-
 
 class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
@@ -45,13 +45,9 @@ class Products(models.Model):
     @property
     def final_price(self):
         if self.discount_price is not None:
-            return self.discount_price
-        elif self.discount_percentage is not None:
-            if 0 <= self.discount_percentage < 100:
-                return self.price * (1 - (self.discount_percentage / 100))
-            else:
-                return self.price
-        return self.price
+            return Decimal(self.discount_price)
+        else:
+            return Decimal(self.price)
 
     def average_rating(self):
         reviews = self.reviews.all()

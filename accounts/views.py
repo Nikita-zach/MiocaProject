@@ -42,22 +42,9 @@ def login_register_view(request):
 @login_required
 def account_dashboard(request):
     orders = Order.objects.filter(user=request.user)
-
-    if request.method == "POST":
-        form = AccountUpdateForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Account details updated successfully.")
-            return redirect('account_dashboard')
-        else:
-            messages.error(request, "Please correct the errors below.")
-    else:
-        form = AccountUpdateForm(instance=request.user)
-
     context = {
         'orders': orders,
         'user': request.user,
-        'form': form
     }
     return render(request, 'my-account.html', context)
 

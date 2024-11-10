@@ -31,7 +31,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {% if user.is_authenticated %}
-                                    <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">My account</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">My orders</a></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
                                 {% else %}
                                     <li><a class="dropdown-item" href="{% url 'login_register' %}">Sign in</a></li>
@@ -72,11 +72,17 @@
                         {% for item in wishlist_items %}
                             <li>
                                 <a href="{% url 'product_detail' item.product.id %}" class="image">
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}">
                                 </a>
                                 <div class="content">
                                     <a href="{% url 'product_detail' item.product.id %}" class="title">{{ item.product.name }}</a>
-                                    <span class="quantity-price">1 x <span class="amount">${{ item.product.price }}</span></span>
+                                        <span class="quantity-price">{{ item.quantity }} x
+                                        {% if item.product.discount_price %}
+                                            <span class="amount">${{ item.product.discount_price }}</span>
+                                        {% else %}
+                                            <span class="amount">${{ item.product.price }}</span>
+                                        {% endif %}
+                                        </span>
                                     <a href="{% url 'remove_from_wishlist' item.product.id %}" class="remove">×</a>
                                 </div>
                             </li>
@@ -115,11 +121,17 @@
                             {% if item.product and item.product.id %}
                                 <li>
                                     <a href="{% url 'product_detail' item.product.id %}" class="image">
-                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                        <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}">
                                     </a>
                                     <div class="content">
                                         <a href="{% url 'product_detail' item.product.id %}" class="title">{{ item.product.name }}</a>
-                                        <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.product.price }}</span></span>
+                                        <span class="quantity-price">{{ item.quantity }} x
+                                        {% if item.product.discount_price %}
+                                            <span class="amount">${{ item.product.discount_price }}</span>
+                                        {% else %}
+                                            <span class="amount">${{ item.product.price }}</span>
+                                        {% endif %}
+                                        </span>
                                         <a href="{% url 'remove_from_cart' item.product.id %}" class="remove">×</a>
                                     </div>
                                 </li>
@@ -136,10 +148,13 @@
             {% endif %}
         </div>
 
+
         <div class="foot">
             <div class="buttons mt-30px">
-                <a href="{% url 'cart' %}" class="btn btn-dark btn-hover-primary mb-30px">View Cart</a>
-                <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn">Checkout</a>
+                {% if cart_items %}
+                    <a href="{% url 'cart' %}" class="btn btn-dark btn-hover-primary mb-30px">View Cart</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn">Checkout</a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -32,10 +32,9 @@ def add_comment(request, blog_id):
     if request.method == "POST":
         blog_section = get_object_or_404(BlogSection, id=blog_id)
         name = request.POST.get('name')
-        email = request.POST.get('email')
         message = request.POST.get('message')
 
-        comment = Comment(blog_section=blog_section, name=name, email=email, message=message)
+        comment = Comment(blog_section=blog_section, name=name, message=message)
         comment.save()
 
         return redirect('blog_detail', blog_id=blog_id)

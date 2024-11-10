@@ -16,9 +16,9 @@ def cart_view(request):
         products.append({
             'product': item.product,
             'quantity': item.quantity,
-            'total_price': item.product.price * item.quantity
+            'total_price': item.product.final_price * item.quantity
         })
-        total_price += item.product.price * item.quantity
+        total_price += item.product.final_price * item.quantity
 
     context = {
         'cart': products,
@@ -56,4 +56,10 @@ def remove_from_cart(request, product_id):
         cart_item.delete()
         messages.success(request, f'{cart_item.product.name} has been removed from your cart.')
 
+    return redirect('cart')
+
+@login_required
+def clear_cart(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    CartItem.objects.filter(cart=cart).delete()
     return redirect('cart')

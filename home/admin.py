@@ -1,11 +1,14 @@
 from django.contrib import admin
+from django.db import models
+from tinymce.widgets import TinyMCE
+
 from compare.models import Compare, CompareItem
 from .models import Feature, NewsletterSubscriber, Banner, Deal, Slider
 from wishlist.models import Wishlist, WishlistItem
 from product.models import Products, ProductImage, Category, Review
 from cart.models import Cart, CartItem
 from info_pages.models import FAQ, Testimonials, Stuff, BrandIcons, ServiceSection
-from payments.models import Order
+from payments.models import Order, ThankYouImage
 from accounts.models import UserModel
 from contact.models import ContactMessage
 from blog.models import BlogWindow, BlogSection, Comment
@@ -78,15 +81,6 @@ class ReviewAdmin(admin.ModelAdmin):
             'fields': ('product', 'name', 'email', 'rating', 'message', 'created_at')
         }),
     )
-
-
-
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'created_at', 'total_price', 'payment_method')
-    list_filter = ('created_at', 'payment_method')
-    date_hierarchy = 'created_at'
-
 
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
@@ -164,6 +158,10 @@ class BlogSectionAdmin(admin.ModelAdmin):
     search_fields = ('title', 'by_user')
     date_hierarchy = 'date'
 
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()},
+    }
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -202,3 +200,14 @@ class DealAdmin(admin.ModelAdmin):
 @admin.register(Slider)
 class SliderAdmin(admin.ModelAdmin):
     list_display = ('background_image', 'created_at')
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('order_number', 'user', 'date', 'status', 'total_quantity', 'total_price')
+    list_filter = ('status', 'date')
+    readonly_fields = ('order_number', 'date', 'total_quantity', 'total_price')
+    ordering = ('-date',)
+
+@admin.register(ThankYouImage)
+class ThankYouImageAdmin(admin.ModelAdmin):
+    list_display = ('image', 'created_at')

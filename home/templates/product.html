@@ -46,7 +46,7 @@
                                 <div class="product">
                                     <div class="thumb">
                                         <a href="{% url 'product_detail' product.id %}" class="image">
-                                            <img src="{{ product.photo }}" alt="{{ product.name }}" />
+                                            <img src="{{ MEDIA_URL }}{{ product.photo.url }}" alt="{{ product.name }}" />
                                         </a>
                                         <span class="badges">
                                             {% if product.discount_percentage %}
@@ -56,9 +56,6 @@
                                         <div class="actions">
                                             <a href="{% url 'add_to_wishlist' product.id %}" class="action wishlist" title="Wishlist">
                                                 <i class="pe-7s-like"></i>
-                                            </a>
-                                            <a href="{% url 'add_to_compare' product.id %}" class="action compare" title="Compare">
-                                                <i class="pe-7s-refresh-2"></i>
                                             </a>
                                         </div>
                                     </div>

@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'compare.apps.CompareConfig',
     'info_pages.apps.InfoPagesConfig',
-    'contact.apps.ContactConfig'
+    'contact.apps.ContactConfig',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
