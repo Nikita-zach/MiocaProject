@@ -3,6 +3,21 @@ from .models import ContactMessage
 
 
 class ContactForm(forms.ModelForm):
+    """
+    A form to collect information for a contact message. The form is used to send user inquiries via the `ContactMessage` model.
+
+    Meta class attributes:
+        model (Model): The model that the form will be associated with. In this case, it's the `ContactMessage` model.
+        fields (list): A list of fields to include in the form. In this case, it's `name`, `email`, `subject`, and `message`.
+        widgets (dict): Custom form field widgets for styling and validation rules (e.g., placeholder text, validation rules).
+        labels (dict): Custom labels for form fields.
+        error_messages (dict): Custom error messages for form validation failures.
+
+    Example:
+        contact_form = ContactForm()
+        if contact_form.is_valid():
+            contact_form.save()  # Save the valid contact message to the database
+    """
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'subject', 'message']

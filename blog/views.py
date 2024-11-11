@@ -4,6 +4,24 @@ from .models import BlogWindow, BlogSection, Comment
 
 
 def blog_detail(request, blog_id):
+    """
+    Displays the details of a specific blog section and allows users to add comments.
+
+    This view retrieves a `BlogSection` based on the provided `blog_id` and renders
+    it with a form to submit comments. If the request is a POST, a new comment is
+    created and associated with the blog section. Afterward, the user is redirected
+    back to the blog detail page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        blog_id (int): The ID of the blog section to display.
+
+    Returns:
+        HttpResponse: Renders the "blog-single.html" template with the blog section and its content.
+
+    Example:
+        A user visits a blog post, submits a comment, and is redirected back to the post page.
+    """
     blog_section = BlogSection.objects.get(id=blog_id)
 
     if request.method == 'POST':
@@ -20,6 +38,22 @@ def blog_detail(request, blog_id):
 
 
 def blog_list_view(request, blog_window_id):
+    """
+    Displays a list of blog sections within a specific blog window.
+
+    The view retrieves a `BlogWindow` based on the provided `blog_window_id` and
+    renders the list of blog sections associated with this window.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        blog_window_id (int): The ID of the blog window to display.
+
+    Returns:
+        HttpResponse: Renders the "blog-search.html" template with the blog window content.
+
+    Example:
+        A user navigates to a blog window and sees all the blog sections related to it.
+    """
     blog_window = get_object_or_404(BlogWindow, id=blog_window_id)
 
     context = {

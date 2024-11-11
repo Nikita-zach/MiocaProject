@@ -7,6 +7,22 @@ from django.db.models import Avg, Count
 
 
 def shop_view(request):
+    """
+    Displays the shop page with available products and categories.
+
+    - Retrieves all visible categories and applies filters based on selected category, minimum price, and maximum price.
+    - Calculates and annotates average rating and review count for each product.
+
+    Context:
+        categories (QuerySet): Visible categories, ordered by 'sort'.
+        products (QuerySet): Filtered and sorted products.
+        selected_category_slug (str): The slug of the selected category.
+        min_price (Decimal): Minimum price filter.
+        max_price (Decimal): Maximum price filter.
+
+    Template:
+        shop.html: Template for rendering the shop page.
+    """
     categories = Category.objects.filter(is_visible=True).order_by('sort')
 
     selected_category_slug = request.GET.get('category', 'all')
@@ -47,6 +63,28 @@ def shop_view(request):
 
 
 def product_detail_view(request, product_id):
+    """
+    Displays the product detail page for a specific product.
+
+    - Shows the selected product's details, associated images, and related products.
+    - Calculates the average rating and final price.
+    - Handles review form submission if POST request is received.
+
+    Context:
+        product (Products): The specific product being viewed.
+        images (QuerySet): Additional images of the product.
+        categories (QuerySet): Categories associated with the product.
+        related_products (QuerySet): Related products in the same categories, excluding the current product.
+        average_rating (float): Average rating of the product.
+        final_price (Decimal): Final price after any applicable discount.
+        discount_price (bool): Whether a discount price is available.
+        reviews (QuerySet): Reviews for the product.
+        review_count (int): Number of reviews for the product.
+        review_form (ReviewForm): Form for submitting a review.
+
+    Template:
+        single-product.html: Template for rendering the product detail page.
+    """
     product = get_object_or_404(Products, id=product_id)
     images = ProductImage.objects.filter(product=product)
     categories = product.categories.all()

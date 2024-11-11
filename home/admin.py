@@ -3,7 +3,7 @@ from django.db import models
 from tinymce.widgets import TinyMCE
 
 from compare.models import Compare, CompareItem
-from .models import Feature, NewsletterSubscriber, Banner, Deal, Slider
+from .models import Feature, Banner, Deal, Slider
 from wishlist.models import Wishlist, WishlistItem
 from product.models import Products, ProductImage, Category, Review
 from cart.models import Cart, CartItem
@@ -180,13 +180,6 @@ class BlogWindowAdmin(admin.ModelAdmin):
 class UserModelAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'city', 'country')
     search_fields = ('username', 'email')
-
-
-@admin.register(NewsletterSubscriber)
-class NewsletterSubscriberAdmin(admin.ModelAdmin):
-    list_display = ('email', 'created_at')
-    search_fields = ('email',)
-    date_hierarchy = 'created_at'
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
