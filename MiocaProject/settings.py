@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG','True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv('HOST','*')]
 
 
 INSTALLED_APPS = [
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,12 +88,23 @@ WSGI_APPLICATION = 'MiocaProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-        'default': {
+DATABASES = {}
+if os.getenv('DB_ENV')=='dev':
+    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'mioca_db.sqlite3',
+    },
+elif os.getenv('DB_ENV')=='prod':
+    DATABASES['production'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
-}
+else:
+    raise Exception('DB_ENV must be either dev or prod')
 
 
 
