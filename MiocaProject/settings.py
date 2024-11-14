@@ -19,7 +19,6 @@ from dotenv import load_dotenv
 
 load_dotenv(".env")
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
@@ -35,8 +34,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary',
-    'cloudinary_storage',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'cart.apps.CartConfig',
@@ -52,10 +49,6 @@ INSTALLED_APPS = [
     'tinymce',
 
 ]
-
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL'),
-}
 
 
 MIDDLEWARE = [
@@ -161,17 +154,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-USE_CLOUDINARY = 'DYNO' in os.environ
-
-if USE_CLOUDINARY:
-    CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-else:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.UserModel'
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
