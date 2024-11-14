@@ -16,6 +16,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 import dotenv
 from dotenv import load_dotenv
+from gunicorn import app
 
 load_dotenv(".env")
 
@@ -156,7 +157,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 
-if 'DYNO' in os.environ:
+if os.getenv('DB_ENV') == 'prod':
     MEDIA_ROOT = '/app/media'
 else:
     MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'media')
