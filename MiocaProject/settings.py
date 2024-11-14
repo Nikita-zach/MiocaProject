@@ -155,7 +155,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'media')
+
+if 'DYNO' in os.environ:
+    MEDIA_ROOT = '/app/media'
+else:
+    MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.UserModel'
 
