@@ -34,7 +34,8 @@
                                     <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">My orders</a></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
                                 {% else %}
-                                    <li><a class="dropdown-item" href="{% url 'login_register' %}">Sign in</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'register' %}">Registration</a></li>
                                 {% endif %}
                             </ul>
                         </div>

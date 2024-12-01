@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from accounts.views import login_register_view, account_dashboard, logout
+from accounts.views import login_view, register_view, account_dashboard, logout
 from blog.views import blog_detail, blog_list_view, add_comment
 from cart.views import remove_from_cart, cart_view, add_to_cart, clear_cart
 from compare.views import product_compare_view, add_to_compare, remove_from_compare
@@ -43,7 +43,8 @@ urlpatterns = [
     path('cart/', cart_view, name='cart'),
     path('wishlist/', wishlist_view, name='wishlist'),
     path('contact/', contact_view, name='contact'),
-    path('login/', login_register_view, name='login_register'),
+    path('login/', login_view, name='login'),
+    path('register', register_view, name='register'),
     path('logout', logout, name='logout'),
     path('checkout/', checkout_view, name='checkout'),
     path('place_order/', place_order, name='place_order'),

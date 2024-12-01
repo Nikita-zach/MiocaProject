@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="robots" content="index, follow" />
-    <title>Sigh In</title>
+    <title>Sign In</title>
     <meta name="description" content="Mioca - Handmade Goods eCommerce HTML Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -27,7 +27,6 @@
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
 </head>
 
 <body>
@@ -46,14 +45,10 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
-
-                        <!-- Tab Links for Login and Register -->
+                        <!-- Tab Links for Login -->
                         <div class="login-register-tab-list nav">
                             <a class="active" data-bs-toggle="tab" href="#lg1">
                                 <h4>Login</h4>
-                            </a>
-                            <a data-bs-toggle="tab" href="#lg2">
-                                <h4>Register</h4>
                             </a>
                         </div>
 
@@ -62,16 +57,46 @@
                             <div id="lg1" class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
-                                        <form method="post" action="{% url 'login_register' %}">
+                                        <form method="post" action="{% url 'login' %}">
                                             {% csrf_token %}
-                                            {{ login_form.non_field_errors }}
-                                            <input type="text" name="username" placeholder="Username" required />
-                                            <input type="password" name="password" placeholder="Password" required />
+
+                                            <!-- Display non-field errors -->
+                                            {% if errors.non_field %}
+                                                <div class="error-message">
+                                                    <p style="color: red;">{{ errors.non_field }}</p>
+                                                </div>
+                                            {% endif %}
+
+                                            <!-- Username Field -->
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    name="username"
+                                                    placeholder="Username"
+                                                    value="{{ request.POST.username }}"
+                                                    required />
+                                                {% if errors.username %}
+                                                    <p style="color: red;">{{ errors.username }}</p>
+                                                {% endif %}
+                                            </div>
+
+                                            <!-- Password Field -->
+                                            <div class="form-group">
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    placeholder="Password"
+                                                    required />
+                                                {% if errors.password %}
+                                                    <p style="color: red;">{{ errors.password }}</p>
+                                                {% endif %}
+                                            </div>
+
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
                                                     <input type="checkbox" name="remember_me" />
                                                     <a class="flote-none" href="javascript:void(0)">Remember me</a>
-                                                    <a href="#">Forgot Password?</a>
+                                                    <a href="{% url 'register' %}">Create an account</a>
                                                 </div>
                                                 <button type="submit" name="login"><span>Login</span></button>
                                             </div>
@@ -79,25 +104,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Register Form -->
-                            <div id="lg2" class="tab-pane">
-                                <div class="login-form-container">
-                                    <div class="login-register-form">
-                                        <form method="post" action="{% url 'login_register' %}">
-                                            {% csrf_token %}
-                                            {{ register_form.non_field_errors }}
-                                            <input type="text" name="username" placeholder="Username" required />
-                                            <input type="password" name="password1" placeholder="Password" required />
-                                            <input type="password" name="password2" placeholder="Confirm Password" required />
-                                            <input type="email" name="email" placeholder="Email" required />
-                                            <div class="button-box">
-                                                <button type="submit" name="register"><span>Register</span></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- End Login Form -->
                         </div>
                     </div>
                 </div>
@@ -105,7 +112,7 @@
         </div>
     </div>
 
-   {% include 'includes/footer.html' %}
+    {% include 'includes/footer.html' %}
 
     <!-- Global Vendor, plugins JS -->
 
@@ -124,10 +131,6 @@
     <script src="{% static 'js/plugins/jquery.zoom.min.js' %}"></script>
     <script src="{% static 'js/plugins/venobox.min.js' %}"></script>
     <script src="{% static 'js/plugins/ajax-mail.js' %}"></script>
-
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <script src="{% static 'js/vendor/vendor.min.js' %}"></script>
-    <script src="{% static 'js/plugins/plugins.min.js' %}"></script> -->
 
     <!-- Main Js -->
     <script src="{% static 'js/main.js' %}"></script>
