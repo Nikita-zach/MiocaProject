@@ -83,7 +83,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'home.context_processor.cart_items',
-                'home.context_processor.wishlist_items'
+                'home.context_processor.wishlist_items',
+                'home.context_processor.global_texts'
             ],
         },
     },
@@ -170,4 +171,251 @@ AUTH_USER_MODEL = 'accounts.UserModel'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DYNAMIC_TEXTS = {
+    # Slider Section
+    'slider_button': "View Collection",
+
+    # Categories Section
+    'category_tag': "Popular Categories",
+    'category_description': "Find one that suits you best",
+
+    # Blog Section
+    'blog_tag': "Latest Blog",
+    'blog_description': (
+        "Dive into our collection of articles and discover fascinating insights, tips, and stories "
+        "about handmade products that will ignite your creativity and passion for crafting."
+    ),
+
+    # Footer Links
+    'footer_links': {
+        'link1': "Go shopping",
+        'link2': "My cart",
+        'link3': "Contact us",
+        'link4': "My account",
+        'link5': "My orders",
+        'link6': "Wishlist",
+        'link7': "About us",
+        'link8': "Privacy Policy",
+        'link9': "FAQ",
+    },
+
+    # Footer Section
+    'footer_tag': "If you have any question, please contact us at",
+    'footer_contact': {
+        'email': "mioca_shop@gmail.com",
+        'address': "370 7TH NEW YORK NY 10001-0041 USA",
+        'phone_numbers': ["+380505033757", "+380687579205"],
+    },
+    'footer_upper_texts': {
+        'text1': "Information",
+        'text2': "Store",
+        'text3': "Account",
+        'text4': "Contact Us",
+    },
+
+    # Blog Comments
+    'blog_comments': {
+        'title': "Comments",
+        'button': "Post a comment",
+        'form_title': "Leave a Comment",
+        'message': "There's no comments yet.",
+        'by': "By, "
+    },
+
+    # About Section
+    'about_titles': {
+        'title1': "Our Stories",
+        'title2': "Our Mission",
+        'title3': "Our Vision",
+    },
+
+    # Team Section
+    'team': {
+        'title': "Team Member",
+        'description': "Meet the best team in the world that works every day to make better products for You.",
+    },
+
+    # Contact Bar
+    'contact_bar': {
+        'title': "Get In Touch",
+        'description': "Visit One Of Our Shop Contact Us Now",
+        'text1': "Phone:",
+        'text2': "Email:",
+        'text3': "Address:",
+    },
+
+    # Contact Form
+    'contact_form': {
+        'title': "Leave a Message",
+        'description': "And we will answer to whatever question you have about our product.",
+        'button': "Send message",
+    },
+
+    # Header Buttons
+    'header_buttons': [
+        "Home",
+        "Shop",
+        "Blog",
+        "About",
+        "Contact",
+        "Login",
+        "Registration",
+        "My orders",
+        "Sign out",
+        "View Wishlist",
+        "View Cart",
+        "Checkout"
+    ],
+
+    # Messages
+    'messages': {
+        'unauthorized': "Sorry, first you'll need to sign in.",
+        'empty_list': "Sorry, there's nothing here yet",
+    },
+
+    # Product Section
+    'product_tags': {
+        'button': "Add to Cart",
+        'tag1': "Information",
+        'tag2': "Description",
+        'tag3': "Reviews",
+    },
+    'product_related': {
+        'tag': "Related Products",
+        'description': "Also, you may be interested in similar products.",
+    },
+
+    # Privacy Policy
+    'privacy_policy': {
+        'question1': "What personal data we collect and why we collect it",
+        'ppo_tags': {
+            'tag1': "Comments",
+            'tag2': "Media",
+            'tag3': "Cookies",
+        },
+        'question2': "When you log in, we will also set up several cookies to save your login information and your screen display choices.",
+        'question3': "Embedded content from other websites",
+        'question4': "How long we retain your data",
+        'question5': "What rights you have over your data",
+        'question6': "Where we send your data",
+        'answer1': (
+                "When visitors leave comments on the site we collect the data shown in the comments form, "
+                "and also the visitor’s IP address and browser user agent string to help spam detection. "
+                "An anonymized string created from your email address (also called a hash) may be provided "
+                "to the Gravatar service to see if you are using it. The Gravatar service privacy policy is "
+                "available here: https://automattic.com/privacy/. After approval of your comment, your profile picture "
+                "is visible to the public in the context of your comment."
+                ),
+        'answer2': (
+                "If you upload images to the website, you should avoid uploading images with embedded location data "
+                "(EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
+                ),
+        'answer3': (
+                "If you leave a comment on our site you may opt-in to saving your name, email address, and website in cookies. "
+                "These are for your convenience so that you do not have to fill in your details again when you leave another comment. "
+                "These cookies will last for one year. If you have an account and you log in to this site, we will set a temporary cookie "
+                "to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
+            ),
+        'answer4': (
+            "When you log in, we will also set up several cookies to save your login information and your screen display choices. "
+            "Login cookies last for two days, and screen options cookies last for a year. If you select 'Remember Me', your login "
+            "will persist for two weeks. If you log out of your account, the login cookies will be removed."
+        ),
+        'answer5': (
+            "Articles on this site may include embedded content (e.g., videos, images, articles, etc.). "
+            "Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website. "
+            "These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction "
+            "with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website."
+        ),
+        'answer6': (
+            "If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve "
+            "any follow-up comments automatically instead of holding them in a moderation queue. For users that register on our website (if any), "
+            "we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information "
+            "at any time (except they cannot change their username). Website administrators can also see and edit that information."
+        ),
+        'answer7': (
+            "If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold "
+            "about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. "
+            "This does not include any data we are obliged to keep for administrative, legal, or security purposes."
+        ),
+        'answer8': (
+            "Visitor comments may be checked through an automated spam detection service to ensure a safe and secure environment for all users."
+        )
+
+    },
+
+    # FAQ Section
+    'faq': {
+        'title': "Below are frequently asked questions, you may find the answer for yourself",
+        'description': (
+            "At Mioca, we are dedicated to ensuring your satisfaction with every purchase. Your happiness is our top priority, "
+            "and we strive to provide quality handcrafted products that meet your needs. If you have any questions or concerns, "
+            "please don’t hesitate to reach out. We’re here to help!"
+        ),
+    },
+    # Order section
+    'order_tag1': 'Order',
+    'order_tag2': 'Date',
+    'order_tag3': 'Status',
+    'order_tag4': 'Total',
+    'order_empty': "There's no orders yet.",
+
+    # Login and register redirects
+    'login_redirect': 'Already have an account?',
+    'register_redirect': 'Create an account',
+    'remember': "Remember me",
+    # Order buttons
+    'order_button1': 'Logout',
+    'order_button2': 'Orders',
+    #Shop Tags
+    'shop': {
+        'no_match': "No products found matching the criteria.",
+        'title': "Categories",
+        'filter': "Price Filter",
+        'min': "Min price:",
+        'max': "Max price:",
+        'button': "Filter",
+    },
+    'cart': {
+        'tag1': "Image",
+        'tag2': "Product Name",
+        'tag3': "Unit Price",
+        'tag4': "QTY",
+        'tag5': "Subtotal",
+        'tag6': "Continue Shopping",
+        'tag7': "Your Cart",
+        'tag8': "There are no more items in your cart",
+        'tag9': "Action",
+        'tag10': "Clear Shopping Cart",
+        'tag11': "Proceed to Checkout",
+        'tag12': "Cart Total",
+        'tag13': "Grand Total",
+
+    },
+    'wishlist': {
+        'tag1': "Image",
+        'tag2': "Product Name",
+        'tag3': "Price",
+        'tag4': "Add to Cart",
+        'tag5': "Remove",
+        'tag6': "Continue Shopping",
+        'tag7': "Your Wishlist",
+        'tag8': "Your Wishlist is empty",
+
+    },
+    'breadcrumbs': {
+        'tag1': "Home",
+        'tag2' : "Cart",
+        'tag3' : "Shop",
+        'tag4' : "Wishlist",
+        'tag5' : "Contact Us",
+        'tag6' : "Checkout",
+        'tag7' : "Privacy Policy",
+        'tag8' : "FAQ",
+        "tag9" : "Blog List",
+        'tag10': "Our Blogs",
+        'tag11': "My Orders",
+    },
+}
 

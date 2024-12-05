@@ -44,11 +44,11 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 text-center">
-                    <h2 class="breadcrumb-title">FAQ</h2>
+                    <h2 class="breadcrumb-title">{{ DYNAMIC_TEXTS.breadcrumbs.tag8|safe }}</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item active">FAQ</li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag8|safe }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>
@@ -65,8 +65,8 @@
                 <div class="ml-auto mr-auto col-lg-9">
                     <div class="checkout-wrapper">
                         <div class="inner-descripe" data-aos="fade-up" data-aos-delay="200">
-                            <h4 class="title">Below are frequently asked questions, you may find the answer for yourself</h4>
-                            <p>At Mioca, we are dedicated to ensuring your satisfaction with every purchase. Your happiness is our top priority, and we strive to provide quality handcrafted products that meet your needs. If you have any questions or concerns, please don’t hesitate to reach out. We’re here to help!</p>
+                            <h4 class="title">{{ DYNAMIC_TEXTS.faq.title|safe }}</h4>
+                            <p>{{ DYNAMIC_TEXTS.faq.description|safe }}</p>
                         </div>
                         <div id="faq" class="panel-group">
                             {% for faq in faqs %}

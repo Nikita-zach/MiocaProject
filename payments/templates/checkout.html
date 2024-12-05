@@ -44,9 +44,9 @@
                     <h2 class="breadcrumb-title">Checkout</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'cart' %}">Cart</a></li>
-                        <li class="breadcrumb-item active">Checkout</li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'cart' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag2|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag6|safe }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>

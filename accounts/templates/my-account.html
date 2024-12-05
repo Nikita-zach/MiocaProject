@@ -42,6 +42,21 @@
 <body>
 
     {% include 'includes/header.html' %}
+    <div class="breadcrumb-area" style="margin-bottom: 15px">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="breadcrumb-title">{{ DYNAMIC_TEXTS.breadcrumbs.tag11|safe }}</h2>
+                    <!-- breadcrumb-list start -->
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag11|safe }}</li>
+                    </ul>
+                    <!-- breadcrumb-list end -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- account area start -->
     <div class="account-dashboard pt-100px pb-100px">
@@ -51,8 +66,8 @@
                     <!-- Nav tabs -->
                     <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
                         <ul role="tablist" class="nav flex-column dashboard-list">
-                            <li><a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>
-                            <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                            <li><a href="#orders" data-bs-toggle="tab" class="nav-link">{{ DYNAMIC_TEXTS.order_button2|safe }}</a></li>
+                            <li><a href="{% url 'logout' %}" class="nav-link">{{ DYNAMIC_TEXTS.order_button1|safe }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -60,15 +75,15 @@
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
                         <div class="tab-pane fade" id="orders">
-                            <h4>Orders</h4>
+                            <h4>{{ DYNAMIC_TEXTS.order_button2|safe }}</h4>
                             <div class="table_page table-responsive">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Order</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Total</th>
+                                            <th>{{ DYNAMIC_TEXTS.order_tag1|safe }}</th>
+                                            <th>{{ DYNAMIC_TEXTS.order_tag2|safe }}</th>
+                                            <th>{{ DYNAMIC_TEXTS.order_tag3|safe }}</th>
+                                            <th>{{ DYNAMIC_TEXTS.order_tag4|safe }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,83 +98,12 @@
                                             {% endfor %}
                                         {% else %}
                                             <tr>
-                                                <td colspan="5">There's no orders yet.</td>
+                                                <td colspan="5">{{ DYNAMIC_TEXTS.order_empty|safe }}</td>
                                             </tr>
                                         {% endif %}
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-details">
-                            <h3>Account details</h3>
-                            {% if user.is_authenticated %}
-                                <div class="login">
-                                    <div class="login_form_container">
-                                        <div class="account_login_form">
-                                            <form action="{% url 'account_dashboard' %}" method="POST">
-                                                {% csrf_token %}
-                                                <div class="input-radio">
-                                                    <span class="custom-radio"><input type="radio" value="1" name="id_gender" {% if user.id_gender == 1 %}checked{% endif %}> Mr.</span>
-                                                    <span class="custom-radio"><input type="radio" value="2" name="id_gender" {% if user.id_gender == 2 %}checked{% endif %}> Mrs.</span>
-                                                </div> <br>
-                                                <div class="default-form-box mb-20">
-                                                    <label>First Name</label>
-                                                    <input type="text" name="first-name" value="{{ user.first_name }}">
-                                                </div>
-                                                <div class="default-form-box mb-20">
-                                                    <label>Last Name</label>
-                                                    <input type="text" name="last-name" value="{{ user.last_name }}">
-                                                </div>
-                                                <div class="default-form-box mb-20">
-                                                    <label>Email</label>
-                                                    <input type="email" name="email-name" value="{{ user.email }}">
-                                                </div>
-                                                <div class="default-form-box mb-20">
-                                                    <label>Password</label>
-                                                    <input type="password" name="user-password" placeholder="Leave blank to keep current password">
-                                                </div>
-                                                <div class="save_button mt-3">
-                                                    <button class="btn" type="submit">Save</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="login">
-                                    <div class="login_form_container">
-                                        <div class="account_login_form">
-                                            <form action="{% url 'register' %}" method="POST">
-                                                {% csrf_token %}
-                                                <h4>Create an account</h4>
-                                                <div class="input-radio">
-                                                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
-                                                    <span class="custom-radio"><input type="radio" value="2" name="id_gender"> Mrs.</span>
-                                                </div> <br>
-                                                <div class="default-form-box mb-20">
-                                                    <label>First Name</label>
-                                                    <input type="text" name="first-name" required>
-                                                </div>
-                                                <div class="default-form-box mb-20">
-                                                    <label>Last Name</label>
-                                                    <input type="text" name="last-name" required>
-                                                </div>
-                                                <div class="default-form-box mb-20">
-                                                    <label>Email</label>
-                                                    <input type="email" name="email-name" required>
-                                                </div>
-                                                <div class="default-form-box mb-20">
-                                                    <label>Password</label>
-                                                    <input type="password" name="user-password" required>
-                                                </div>
-                                                <div class="save_button mt-3">
-                                                    <button class="btn" type="submit">Register</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>

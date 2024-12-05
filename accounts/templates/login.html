@@ -95,8 +95,8 @@
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
                                                     <input type="checkbox" name="remember_me" />
-                                                    <a class="flote-none" href="javascript:void(0)">Remember me</a>
-                                                    <a href="{% url 'register' %}">Create an account</a>
+                                                    <a class="flote-none" href="javascript:void(0)">{{ DYNAMIC_TEXTS.remember|safe }}</a>
+                                                    <a href="{% url 'register' %}">{{ DYNAMIC_TEXTS.registration_redirect|safe }}</a>
                                                 </div>
                                                 <button type="submit" name="login"><span>Login</span></button>
                                             </div>

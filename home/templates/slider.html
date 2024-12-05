@@ -19,7 +19,7 @@
                                         <span>${{ product.price }}</span>
                                     {% endif %}
                                 </span>
-                                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary m-auto text-uppercase">View Collection</a>
+                                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary m-auto text-uppercase">{{ DYNAMIC_TEXTS.slider_button|safe }}</a>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative">

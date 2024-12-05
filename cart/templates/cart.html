@@ -24,11 +24,11 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 text-center">
-                    <h2 class="breadcrumb-title">Cart</h2>
+                    <h2 class="breadcrumb-title">{{ DYNAMIC_TEXTS.breadcrumbs.tag2|safe }}</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item active">Cart</li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag2|safe }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>
@@ -38,7 +38,7 @@
 
     <div class="cart-main-area pt-100px pb-100px">
         <div class="container">
-            <h3 class="cart-page-title">Your cart items</h3>
+            <h3 class="cart-page-title">{{ DYNAMIC_TEXTS.cart.tag7|safe }}</h3>
 
             {% if messages %}
                 {% for message in messages %}
@@ -51,12 +51,12 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th>Unit Price</th>
-                                <th>Qty</th>
-                                <th>Subtotal</th>
-                                <th>Action</th>
+                                <th>{{ DYNAMIC_TEXTS.cart.tag1|safe }}</th>
+                                <th>{{ DYNAMIC_TEXTS.cart.tag2|safe }}</th>
+                                <th>{{ DYNAMIC_TEXTS.cart.tag3|safe }}</th>
+                                <th>{{ DYNAMIC_TEXTS.cart.tag4|safe }}</th>
+                                <th>{{ DYNAMIC_TEXTS.cart.tag5|safe }}</th>
+                                <th>{{ DYNAMIC_TEXTS.cart.tag9|safe }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,10 +97,10 @@
                     <div class="col-lg-12">
                         <div class="cart-shiping-update-wrapper">
                             <div class="cart-shiping-update">
-                                <a href="{% url 'shop' %}">Continue Shopping</a>
+                                <a href="{% url 'shop' %}">{{ DYNAMIC_TEXTS.cart.tag6|safe }}</a>
                             </div>
                             <div class="cart-clear">
-                                <a href="{% url 'clear_cart' %}">Clear Shopping Cart</a>
+                                <a href="{% url 'clear_cart' %}">{{ DYNAMIC_TEXTS.cart.tag10|safe }}</a>
                             </div>
                         </div>
                     </div>
@@ -108,11 +108,11 @@
                 <div class="col-lg-4 col-md-12 mt-md-30px">
                     <div class="grand-totall">
                         <div class="title-wrap">
-                            <h4 class="cart-bottom-title section-bg-gary-cart" style='margin-bottom: 20px'>Cart Total</h4>
+                            <h4 class="cart-bottom-title section-bg-gary-cart" style='margin-bottom: 20px'>{{ DYNAMIC_TEXTS.cart.tag12|safe }}</h4>
                         </div>
-                        <h4 class="grand-totall-title">Grand Total <span>${{ total_price|floatformat:2 }}</span></h4>
+                        <h4 class="grand-totall-title">{{ DYNAMIC_TEXTS.cart.tag13|safe }}<span>${{ total_price|floatformat:2 }}</span></h4>
 
-                        <a href="{% url 'checkout' %}" class="proceed-to-checkout-btn">Proceed to Checkout</a>
+                        <a href="{% url 'checkout' %}" class="proceed-to-checkout-btn">{{ DYNAMIC_TEXTS.cart.tag11|safe }}</a>
                     </div>
                 </div>
             {% else %}
@@ -122,9 +122,9 @@
                             <div class="col-md-12">
                                 <div class="empty-text-contant text-center">
                                     <i class="pe-7s-shopbag"></i>
-                                    <h3>There are no more items in your cart</h3>
+                                    <h3>{{ DYNAMIC_TEXTS.cart.tag8|safe }}</h3>
                                     <a class="empty-cart-btn" href="{% url 'shop' %}">
-                                        <i class="fa fa-arrow-left"> </i> Continue shopping
+                                        <i class="fa fa-arrow-left"> </i> {{ DYNAMIC_TEXTS.cart.tag6|safe }}
                                     </a>
                                 </div>
                             </div>

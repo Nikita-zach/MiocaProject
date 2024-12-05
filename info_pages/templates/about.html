@@ -63,11 +63,11 @@
                         <p class="para-2">{{ service_section.subtitle_2 }}</p>
                         <div class="mision-vision">
                             <div class="mision">
-                                <span class="heading">Our Mission</span>
+                                <span class="heading">{{ DYNAMIC_TEXTS.about_titles.title2|safe }}</span>
                                 <p class="mision-desc">{{ service_section.our_mission1 }}</p>
                             </div>
                             <div class="vision">
-                                <span class="heading">Our Vision</span>
+                                <span class="heading">{{ DYNAMIC_TEXTS.about_titles.title3|safe }}</span>
                                 <p class="vision-desc">{{ service_section.our_mission2 }}</p>
                             </div>
                         </div>
@@ -106,8 +106,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title line-height-1">Team Member</h2>
-                        <p>Meet the best team in the world that works every day to make better products for You. </p>
+                        <h2 class="title line-height-1">{{ DYNAMIC_TEXTS.team.title|safe }}</h2>
+                        <p>{{ DYNAMIC_TEXTS.team.description|safe }} </p>
                     </div>
                 </div>
             </div>

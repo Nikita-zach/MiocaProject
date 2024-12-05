@@ -15,11 +15,11 @@
                 <div class="col align-self-center d-none d-lg-block">
                     <div class="main-menu">
                         <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'shop' %}">Shop</a></li>
-                            <li><a href="{% url 'blog_list' blog_window_id=1 %}">Blog</a></li>
-                            <li><a href="{% url 'about' %}">About</a></li>
-                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            <li><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.header_buttons.0|safe }}</a></li>
+                            <li><a href="{% url 'shop' %}">{{ DYNAMIC_TEXTS.header_buttons.1|safe }}</a></li>
+                            <li><a href="{% url 'blog_list' blog_window_id=1 %}">{{ DYNAMIC_TEXTS.header_buttons.2|safe }}</a></li>
+                            <li><a href="{% url 'about' %}">{{ DYNAMIC_TEXTS.header_buttons.3|safe }}</a></li>
+                            <li><a href="{% url 'contact' %}">{{ DYNAMIC_TEXTS.header_buttons.4|safe }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {% if user.is_authenticated %}
-                                    <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">My orders</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'account_dashboard' %}">{{ DYNAMIC_TEXTS.header_buttons.7|safe }}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">{{ DYNAMIC_TEXTS.header_buttons.8|safe }}</a></li>
                                 {% else %}
-                                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'register' %}">Registration</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">{{ DYNAMIC_TEXTS.header_buttons.5|safe }}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'register' %}">{{ DYNAMIC_TEXTS.header_buttons.6|safe }}</a></li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -90,15 +90,15 @@
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>There's nothing here yet.</p>
+                    <p>{{ DYNAMIC_TEXTS.messages.empty_list|safe }}</p>
                 {% endif %}
             {% else %}
-                <p>Sorry, first you'll need to sign in.</p>
+                <p>{{ DYNAMIC_TEXTS.messages.unauthorized|safe }}</p>
             {% endif %}
         </div>
         <div class="foot">
             <div class="buttons">
-                <a href="{% url 'wishlist' %}" class="btn btn-dark btn-hover-primary mt-30px">View Wishlist</a>
+                <a href="{% url 'wishlist' %}" class="btn btn-dark btn-hover-primary mt-30px">{{ DYNAMIC_TEXTS.header_buttons.9|safe }}</a>
             </div>
         </div>
     </div>
@@ -136,16 +136,14 @@
                                         <a href="{% url 'remove_from_cart' item.product.id %}" class="remove">×</a>
                                     </div>
                                 </li>
-                            {% else %}
-                                <li><p>Product not available.</p></li>
                             {% endif %}
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>There's nothing here yet.</p>
+                    <p>{{ DYNAMIC_TEXTS.messages.empty_list|safe }}.</p>
                 {% endif %}
             {% else %}
-                <p>Sorry, first you'll need to sign in.</p>
+                <p>{{ DYNAMIC_TEXTS.messages.unauthorized|safe }}</p>
             {% endif %}
         </div>
 
@@ -153,8 +151,8 @@
         <div class="foot">
             <div class="buttons mt-30px">
                 {% if cart_items %}
-                    <a href="{% url 'cart' %}" class="btn btn-dark btn-hover-primary mb-30px">View Cart</a>
-                    <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn">Checkout</a>
+                    <a href="{% url 'cart' %}" class="btn btn-dark btn-hover-primary mb-30px">{{ DYNAMIC_TEXTS.header_buttons.10|safe }}</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-outline-dark current-btn">{{ DYNAMIC_TEXTS.header_buttons.11|safe }}</a>
                 {% endif %}
             </div>
         </div>
@@ -169,11 +167,11 @@
     <div class="inner customScroll">
         <div class="offcanvas-menu mb-4">
             <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'shop' %}">Shop</a></li>
-                <li><a href="{% url 'blog_list' blog_window_id=1 %}">Blog</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.header_buttons.0|safe }}</a></li>
+                <li><a href="{% url 'shop' %}">{{ DYNAMIC_TEXTS.header_buttons.1|safe }}</a></li>
+                <li><a href="{% url 'blog_list' blog_window_id=1 %}">{{ DYNAMIC_TEXTS.header_buttons.2|safe }}</a></li>
+                <li><a href="{% url 'about' %}">{{ DYNAMIC_TEXTS.header_buttons.3|safe }}</a></li>
+                <li><a href="{% url 'contact' %}">{{ DYNAMIC_TEXTS.header_buttons.4|safe }}</a></li>
             </ul>
         </div>
         <!-- OffCanvas Menu End -->

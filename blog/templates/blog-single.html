@@ -42,9 +42,9 @@
                     <h2 class="breadcrumb-title">{{ blog_section.title }}</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'blog_list' 1 %}">Blog List</a></li>
-                        <li class="breadcrumb-item active">Our Blog</li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog_list' 1 %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag9|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag10|safe }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="blog-post-content-inner mt-30px" data-aos="fade-up" data-aos-delay="400">
                                 <div class="blog-author-date">
-                                    <span> By,<a class="blog-author cercle-shape" href="#">{{ blog_section.by_user }}</a></span>
+                                    <span> {{ DYNAMIC_TEXTS.blog_comments.by|safe }}<a class="blog-author cercle-shape" href="#">{{ blog_section.by_user }}</a></span>
                                     <span class="blog-date">{{ blog_section.date|date:"d F, Y" }}</span>
                                 </div>
                                 <h4 class="blog-title">{{ blog_section.title }}</h4>
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="comment-area">
-                        <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">Comments</h2>
+                        <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">{{ DYNAMIC_TEXTS.blog_comments.title|safe }}</h2>
                         <div class="review-wrapper">
                             {% if blog_section.comments.exists %}
                                 {% for comment in blog_section.comments.all %}
@@ -108,13 +108,13 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <p>There's no comments yet.</p>
+                                <p>{{ DYNAMIC_TEXTS.blog_comments.message|safe }}</p>
                             {% endif %}
                         </div>
                     </div>
 
                     <div class="blog-comment-form">
-                        <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">Leave a Comment</h2>
+                        <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">{{ DYNAMIC_TEXTS.blog_comments.form_title|safe }}</h2>
                         <form method="POST" action="{% url 'add_comment' blog_section.id %}">
                             {% csrf_token %}
                             <div class="form-inner">
@@ -135,7 +135,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12" data-aos="fade-up" data-aos-delay="200">
-                                        <button class="btn btn-primary btn-hover-dark border-0 mt-30px" type="submit">Post A Comment</button>
+                                        <button class="btn btn-primary btn-hover-dark border-0 mt-30px" type="submit">{{ DYNAMIC_TEXTS.blog_comments.button|safe }}</button>
                                     </div>
                                 </div>
                             </div>

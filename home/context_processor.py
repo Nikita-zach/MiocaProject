@@ -1,5 +1,6 @@
 from cart.models import Cart
 from wishlist.models import Wishlist
+from django.conf import settings
 
 
 def cart_items(request):
@@ -72,4 +73,28 @@ def wishlist_items(request):
             }
     return {
         'wishlist_items': [],
+    }
+
+def global_texts(request):
+    """
+    Context processor to provide dynamic text configurations to all templates.
+
+    This context processor is used to inject a dictionary of pre-defined,
+    dynamic texts (stored in `settings.DYNAMIC_TEXTS`) into the template
+    context. It allows developers to centralize and manage all text-related
+    content for the project, ensuring consistency and ease of updates.
+
+    Parameters:
+    -----------
+    request : HttpRequest
+        The HTTP request object passed automatically by Django.
+
+    Returns:
+    --------
+    dict
+        A dictionary containing the `DYNAMIC_TEXTS` defined in settings,
+        accessible globally in templates.
+    """
+    return {
+        'DYNAMIC_TEXTS': settings.DYNAMIC_TEXTS,
     }

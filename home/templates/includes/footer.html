@@ -8,13 +8,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-lg-3 mb-md-30px mb-lm-30px">
                         <div class="single-wedge">
-                            <h4 class="footer-herading">Information</h4>
+                            <h4 class="footer-herading">{{ DYNAMIC_TEXTS.footer_upper_texts.text1|safe }}</h4>
                             <div class="footer-links">
                                 <div class="footer-row">
                                     <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="{% url 'about' %}">About us</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'faq' %}">FAQ</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'about' %}">{{ DYNAMIC_TEXTS.footer_links.link7|safe }}</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'privacy_policy' %}">{{ DYNAMIC_TEXTS.footer_links.link8|safe }}</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'faq' %}">{{ DYNAMIC_TEXTS.footer_links.link9|safe }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -22,13 +22,13 @@
                     </div>
                     <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px">
                         <div class="single-wedge">
-                            <h4 class="footer-herading">Account</h4>
+                            <h4 class="footer-herading">{{ DYNAMIC_TEXTS.footer_upper_texts.text3|safe }}</h4>
                             <div class="footer-links">
                                 <div class="footer-row">
                                     <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="{% url 'account_dashboard' %}">My account</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'account_dashboard' %}">My orders</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'wishlist' %}">Wishlist</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'account_dashboard' %}">{{ DYNAMIC_TEXTS.footer_links.link4|safe }}</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'account_dashboard' %}">{{ DYNAMIC_TEXTS.footer_links.link5|safe }}</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'wishlist' %}">{{ DYNAMIC_TEXTS.footer_links.link6|safe }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,13 +36,13 @@
                     </div>
                     <div class="col-md-6 col-lg-2 col-sm-6 mb-sm-30px">
                         <div class="single-wedge">
-                            <h4 class="footer-herading">Store</h4>
+                            <h4 class="footer-herading">{{ DYNAMIC_TEXTS.footer_upper_texts.text2|safe }}</h4>
                             <div class="footer-links">
                                 <div class="footer-row">
                                     <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="{% url 'shop' %}">Go shopping</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'cart' %}">My cart</a></li>
-                                        <li class="li"><a class="single-link" href="{% url 'contact' %}">Contact us</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'shop' %}">{{ DYNAMIC_TEXTS.footer_links.link1|safe }}</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'cart' %}">{{ DYNAMIC_TEXTS.footer_links.link2|safe }}</a></li>
+                                        <li class="li"><a class="single-link" href="{% url 'contact' %}">{{ DYNAMIC_TEXTS.footer_links.link3|safe }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -50,15 +50,14 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-md-6 col-sm-6 pl-120px line-shape">
                         <div class="single-wedge">
-                            <h4 class="footer-herading">Contact Us</h4>
+                            <h4 class="footer-herading">{{ DYNAMIC_TEXTS.footer_upper_texts.text4|safe }}</h4>
                             <div class="footer-links">
-                                <p class="mail">If you have any question, please <br>
-                                    contact us at <a href="mailto:mioca_shop@gmail.com">mioca_shop@gmail.com</a></p>
-                                <p class="address"><i class="pe-7s-map-marker"></i> <span>370 7TH NEW YORK NY 10001-0041 USA</span></p>
+                                <p class="mail">{{ DYNAMIC_TEXTS.footer_tag|safe }} <br><a href="mailto:mioca_shop@gmail.com">{{ DYNAMIC_TEXTS.footer_contact.email|safe }}</a></p>
+                                <p class="address"><i class="pe-7s-map-marker"></i> <span>{{ DYNAMIC_TEXTS.footer_contact.address|safe }}</span></p>
                                 <p class="phone m-0">
                                     <i class="pe-7s-phone"></i>
-                                    <span><a href="tel:+380505033757">+380505033757</a><br>
-                                    <a href="tel:+380687579205">+380687579205</a></span>
+                                    <span><a href="tel:+380505033757">{{ DYNAMIC_TEXTS.footer_contact.phone_numbers.0|safe }}</a><br>
+                                    <a href="tel:+380687579205">{{ DYNAMIC_TEXTS.footer_contact.phone_numbers.1|safe }}</a></span>
                                 </p>
                             </div>
                         </div>

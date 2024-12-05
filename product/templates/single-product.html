@@ -39,8 +39,8 @@
                     <h2 class="breadcrumb-title">{{ product.name }}</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'shop' %}">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'shop' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag3|safe }}</a></li>
                         <li class="breadcrumb-item active">{{ product.name }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
@@ -92,7 +92,7 @@
                             <div class="pro-details-cart">
                                 <form action="{% url 'add_to_cart' product.id %}" method="POST">
                                     {% csrf_token %}
-                                    <button class="add-cart" type="submit">Add To Cart</button>
+                                    <button class="add-cart" type="submit">{{ DYNAMIC_TEXTS.product_tags.button|safe }}</button>
                                 </form>
                             </div>
                             <div class="pro-details-compare-wishlist pro-details-wishlist">
@@ -118,9 +118,9 @@
         <div class="container">
             <div class="description-review-wrapper">
                 <div class="description-review-topbar nav">
-                    <a data-bs-toggle="tab" href="#des-details2">Information</a>
-                    <a class="active" data-bs-toggle="tab" href="#des-details1">Description</a>
-                    <a data-bs-toggle="tab" href="#des-details3">Reviews ({{ product.reviews.count }})</a>
+                    <a data-bs-toggle="tab" href="#des-details2">{{ DYNAMIC_TEXTS.product_tags.tag1|safe }}</a>
+                    <a class="active" data-bs-toggle="tab" href="#des-details1">{{ DYNAMIC_TEXTS.product_tags.tag2|safe }}</a>
+                    <a data-bs-toggle="tab" href="#des-details3">{{ DYNAMIC_TEXTS.product_tags.tag3|safe }} ({{ product.reviews.count }})</a>
                 </div>
                 <div class="tab-content description-review-bottom">
                     <div id="des-details2" class="tab-pane">
@@ -214,8 +214,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center line-height-1">
-                        <h2 class="title">Related Products</h2>
-                        <p class="sub-title">Also,you may be interested in similar products.</p>
+                        <h2 class="title">{{ DYNAMIC_TEXTS.product_related.tag|safe }}</h2>
+                        <p class="sub-title">{{ DYNAMIC_TEXTS.product_related.description|safe }}</p>
                     </div>
                 </div>
             </div>
@@ -248,7 +248,7 @@
                                     <span class="rating-wrap">
                                         <span class="star" style="width: {{ product.average_rating_percent }}%"></span>
                                     </span>
-                                    <span class="rating-num">({{ product.reviews.count }} Reviews)</span>
+                                    <span class="rating-num">({{ product.reviews.count }} {{ DYNAMIC_TEXTS.product_tags.tag3|safe }}</span>
                                 </span>
                             </div>
                         </div>

@@ -32,12 +32,12 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 text-center">
-                    <h2 class="breadcrumb-title">Wishlist</h2>
+                    <h2 class="breadcrumb-title">{{ DYNAMIC_TEXTS.breadcrumbs.tag4|safe }}</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'cart' %}">Cart</a></li>
-                        <li class="breadcrumb-item active">Wishlist</li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'cart' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag2|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag4|safe }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>
@@ -48,7 +48,7 @@
     <!-- Wishlist Area Start -->
     <div class="cart-main-area pt-100px pb-100px">
         <div class="container">
-            <h3 class="cart-page-title">Your Wishlist Items</h3>
+            <h3 class="cart-page-title">{{ DYNAMIC_TEXTS.wishlist.tag7|safe }}</h3>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                     <form action="#">
@@ -56,11 +56,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Add To Cart</th>
-                                        <th>Remove</th>
+                                        <th>{{ DYNAMIC_TEXTS.wishlist.tag1|safe }}</th>
+                                        <th>{{ DYNAMIC_TEXTS.wishlist.tag2|safe }}</th>
+                                        <th>{{ DYNAMIC_TEXTS.wishlist.tag3|safe }}</th>
+                                        <th>{{ DYNAMIC_TEXTS.wishlist.tag4|safe }}</th>
+                                        <th>{{ DYNAMIC_TEXTS.wishlist.tag5|safe }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,15 +78,15 @@
                                                 <span class="amount">${{ item.product.final_price }}</span>
                                             </td>
                                             <td class="product-wishlist-cart">
-                                                <a href="{% url 'add_to_cart' item.product.id %}" class="action">Add to Cart</a>
+                                                <a href="{% url 'add_to_cart' item.product.id %}" class="action">{{ DYNAMIC_TEXTS.wishlist.tag4|safe }}</a>
                                             </td>
                                             <td class="product-wishlist-cart">
-                                                <a href="{% url 'remove_from_wishlist' item.product.id %}" class="action">Remove</a>
+                                                <a href="{% url 'remove_from_wishlist' item.product.id %}" class="action">{{ DYNAMIC_TEXTS.wishlist.tag5|safe }}</a>
                                             </td>
                                         </tr>
                                     {% empty %}
                                         <tr>
-                                            <td colspan="5" style="text-align: center;">Your wishlist is empty.</td>
+                                            <td colspan="5" style="text-align: center;">{{ DYNAMIC_TEXTS.wishlist.tag8|safe }}</td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
@@ -96,7 +96,7 @@
                             <div class="col-lg-12">
                                 <div class="cart-shiping-update-wrapper">
                                     <div class="cart-shiping-update">
-                                        <a href="{% url 'shop' %}">Continue Shopping</a>
+                                        <a href="{% url 'shop' %}">{{ DYNAMIC_TEXTS.wishlist.tag6|safe }}</a>
                                     </div>
                                 </div>
                             </div>

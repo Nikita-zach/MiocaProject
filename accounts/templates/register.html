@@ -119,7 +119,7 @@
 
                                         <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <a href="{% url 'login' %}">Already have an account?</a>
+                                                    <a href="{% url 'login' %}">{{ DYNAMIC_TEXTS.login_redirect|safe }}</a>
                                                 </div>
                                                 <button type="submit" name="register"><span>Register</span></button>
                                             </div>

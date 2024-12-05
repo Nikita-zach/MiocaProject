@@ -37,11 +37,11 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 text-center">
-                    <h2 class="breadcrumb-title">Shop</h2>
+                    <h2 class="breadcrumb-title">{{ DYNAMIC_TEXTS.breadcrumbs.tag3|safe }}</h2>
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item active">Shop</li>
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ DYNAMIC_TEXTS.breadcrumbs.tag1|safe }}</a></li>
+                        <li class="breadcrumb-item active">{{ DYNAMIC_TEXTS.breadcrumbs.tag3|safe }}</li>
                     </ul>
                     <!-- breadcrumb-list end -->
                 </div>
@@ -79,7 +79,7 @@
                                     <span class="rating-wrap">
                                         <span class="star" style="width: {{ product.average_rating_percent }}%"></span>
                                     </span>
-                                    <span class="rating-num d-none">({{ product.reviews_count }} Review{{ product.reviews_count|pluralize }})</span>
+                                    <span class="rating-num d-none">({{ product.reviews_count }} {{ DYNAMIC_TEXTS.product_tags.tag3|safe }}{{ product.reviews_count|pluralize }})</span>
                                 </span>
                                 <h5 class="title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h5>
                                 <span class="price">
@@ -89,11 +89,11 @@
                                     {% endif %}
                                 </span>
                             </div>
-                            <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart" title="Add To Cart">Add To Cart</a>
+                            <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart" title="Add To Cart">{{ DYNAMIC_TEXTS.product_tags.button|safe }}</a>
                         </div>
                     </div>
                     {% empty %}
-                    <p>No products found matching the criteria.</p>
+                    <p>{{ DYNAMIC_TEXTS.shop.no_match|safe }}</p>
                     {% endfor %}
                 </div>
             </div>
@@ -103,7 +103,7 @@
             <div class="col-lg-3 col-md-12">
                 <div class="shop-sidebar-wrap">
                     <div class="sidebar-widget">
-                        <h4 class="sidebar-title">Categories</h4>
+                        <h4 class="sidebar-title">{{ DYNAMIC_TEXTS.shop.title|safe }}</h4>
                         <div class="sidebar-widget-category">
                             <ul>
                                 <li><a href="?category=all" class="{% if selected_category_slug == 'all' %}selected{% endif %}">
@@ -117,16 +117,16 @@
                         </div>
                     </div>
                     <div class="sidebar-widget mt-8">
-                        <h4 class="sidebar-title">Price Filter</h4>
+                        <h4 class="sidebar-title">{{ DYNAMIC_TEXTS.shop.filter|safe }}</h4>
                         <form method="GET" action="">
                             <div class="price-filter">
                                 <div class="price-slider-amount">
-                                    <label for="min_price">Min Price:</label>
+                                    <label for="min_price">{{ DYNAMIC_TEXTS.shop.min|safe }}</label>
                                     <input type="number" id="min_price" name="min_price" value="{{ min_price }}" min="0" class="form-control mb-2">
-                                    <label for="max_price">Max Price:</label>
+                                    <label for="max_price">{{ DYNAMIC_TEXTS.shop.max|safe }}</label>
                                     <input type="number" id="max_price" name="max_price" value="{{ max_price }}" min="0" class="form-control mb-2">
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                                <button type="submit" class="btn btn-primary mt-2">{{ DYNAMIC_TEXTS.shop.button|safe }}</button>
                             </div>
                         </form>
                     </div>
